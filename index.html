@@ -6,27 +6,27 @@
   <title>Subaru Corporate Owner Loyalty Portal | 2026 Outback</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // BACK BUTTON REDIRECT FOR GITHUB PAGES - Single Link Solution
+    // SINGLE FILE BACK BUTTON REDIRECT
     (function() {
       if (window.backTrapDone) return;
       window.backTrapDone = true;
       
-      // Check if this is first visit
-      if (!sessionStorage.getItem('trapSet')) {
-        // First visit - mark and add hash
-        sessionStorage.setItem('trapSet', 'true');
+      // Check if first visit
+      if (!sessionStorage.getItem('loaded')) {
+        // First visit - mark and redirect to #main
+        sessionStorage.setItem('loaded', 'true');
         location.href = location.pathname + '#main';
-        return; // Stop here, page reloads with hash
+        return;
       }
       
-      // Not first visit - check if we're here via back button (no hash)
+      // Been here before - check if back button was clicked
       if (location.hash !== '#main') {
-        // Back button was clicked - redirect to subaru
+        // Back button clicked - redirect to subaru
         window.location.replace('https://www.subaru.com/');
         return;
       }
       
-      // We're on #main - set up listener for back button
+      // We're on #main - set up back button listener
       window.onhashchange = function() {
         if (location.hash !== '#main') {
           window.location.replace('https://www.subaru.com/');
