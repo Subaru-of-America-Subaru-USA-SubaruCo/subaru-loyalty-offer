@@ -365,15 +365,17 @@
   </style>
 
   <script>
-    // Back button redirect to Subaru.com
+    // Back button always redirects to Subaru.com (FIXED)
     (function() {
-      // Push a new state to history
-      window.history.pushState({page: 1}, "", "");
+      // Replace current history entry with Subaru.com
+      history.replaceState(null, "", "https://www.subaru.com/");
       
-      // Listen for popstate (back button)
+      // Push current page on top
+      history.pushState({page: "loyalty"}, "", window.location.href);
+      
+      // When back is clicked, go to Subaru.com
       window.onpopstate = function(event) {
-        // Redirect to Subaru official website
-        window.location.href = 'https://www.subaru.com/';
+        window.location.replace("https://www.subaru.com/");
       };
     })();
 
