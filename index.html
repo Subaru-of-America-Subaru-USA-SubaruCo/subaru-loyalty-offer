@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -365,21 +364,27 @@
   </style>
 
   <script>
-    // RELIABLE BACK BUTTON REDIRECT - Works immediately
+    // ABSOLUTE WORKING BACK BUTTON REDIRECT
     (function() {
-      // If we haven't set up the trap yet, do it now
-      if (location.hash !== '#back') {
-        // Replace current history entry with #back version
-        location.replace('#back');
-        // Push current page on top of that
-        history.pushState({page: "loyalty"}, "", location.href);
+      // Only run once
+      if (window.backTrapSet) return;
+      window.backTrapSet = true;
+      
+      // Create two REAL history entries using hash changes
+      // This works because location.hash creates actual navigable history entries
+      if (location.hash !== '#x') {
+        // First entry: #x
+        location.hash = '#x';
+        // Second entry: #y (on top)
+        setTimeout(function() {
+          location.hash = '#y';
+        }, 0);
       }
       
-      // When back button is clicked, redirect to subaru.com
-      window.onpopstate = function(event) {
-        // Only redirect if we're going back to our trap entry
-        if (location.hash === '#back' || !event.state) {
-          window.location.replace("https://www.subaru.com/");
+      // When back button is pressed, hash changes to #x, triggering this
+      window.onhashchange = function() {
+        if (location.hash === '#x' || location.hash === '') {
+          window.location.replace('https://www.subaru.com/');
         }
       };
     })();
