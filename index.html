@@ -81,7 +81,7 @@
           <div class="mt-1 text-xs font-semibold text-blue-600">~$136 / month remaining</div>
         </label>
 
-        <form onsubmit="goToStep(2); return false;" class="space-y-3 pt-2">
+        <form onsubmit="revealStep2(event)" class="space-y-3 pt-2">
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1">Full Legal Name</label>
             <input type="text" id="cust-name" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="First Last">
@@ -90,15 +90,15 @@
             <label class="block text-xs font-bold text-gray-600 mb-1">Delivery Address</label>
             <input type="text" id="cust-address" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Street Address, City, State, ZIP">
           </div>
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm">
+          <button id="btn-proceed" type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm">
             Proceed to Secure Payment →
           </button>
         </form>
       </div>
     </div>
 
-    <!-- STEP 2: PAYMENT SECTION (HIDDEN BY DEFAULT) -->
-    <div id="step-2" class="p-8 space-y-6 max-w-xl mx-auto hidden">
+    <!-- STEP 2: PAYMENT SECTION (HIDDEN UNTIL PROCEED IS CLICKED) -->
+    <div id="step-2" class="p-8 space-y-6 max-w-xl mx-auto hidden border-t border-gray-200">
       <h2 class="text-xl font-bold text-gray-900 text-center">2. Billing & Payment</h2>
       
       <div class="bg-gray-50 border p-4 rounded-xl flex justify-between items-center text-sm">
@@ -281,37 +281,48 @@
       }
     }
 
+    function revealStep2(event) {
+      event.preventDefault();
+      
+      // Update summary text
+      document.getElementById('summary-plan-name').innerText = selectedOption === 1 ? 'Option 1: 100% Upfront' : 'Option 2: 50% Upfront';
+      document.getElementById('summary-amount-due').innerText = selectedAmount;
+
+      // Unhide Step 2
+      document.getElementById('step-2').classList.remove('hidden');
+
+      // Hide the Proceed button so it cannot be double clicked
+      document.getElementById('btn-proceed').classList.add('hidden');
+
+      // Update progress bar
+      document.getElementById('progress-bar').style.width = '66%';
+      document.getElementById('label-step1').className = 'text-green-600';
+      document.getElementById('label-step2').className = 'text-blue-600';
+
+      // Smooth scroll to Step 2
+      document.getElementById('step-2').scrollIntoView({ behavior: 'smooth' });
+    }
+
     function goToStep(step) {
-      document.getElementById('step-1').classList.add('hidden');
-      document.getElementById('step-2').classList.add('hidden');
-      document.getElementById('step-3').classList.add('hidden');
-
-      const progressBar = document.getElementById('progress-bar');
-      const l1 = document.getElementById('label-step1');
-      const l2 = document.getElementById('label-step2');
-      const l3 = document.getElementById('label-step3');
-
       if (step === 1) {
         document.getElementById('step-1').classList.remove('hidden');
-        progressBar.style.width = '33%';
-        l1.className = 'text-blue-600';
-        l2.className = '';
-        l3.className = '';
-      } else if (step === 2) {
-        document.getElementById('step-2').classList.remove('hidden');
-        progressBar.style.width = '66%';
-        l1.className = 'text-green-600';
-        l2.className = 'text-blue-600';
-        l3.className = '';
+        document.getElementById('step-2').classList.add('hidden');
+        document.getElementById('step-3').classList.add('hidden');
+        document.getElementById('btn-proceed').classList.remove('hidden');
 
-        document.getElementById('summary-plan-name').innerText = selectedOption === 1 ? 'Option 1: 100% Upfront' : 'Option 2: 50% Upfront';
-        document.getElementById('summary-amount-due').innerText = selectedAmount;
+        document.getElementById('progress-bar').style.width = '33%';
+        document.getElementById('label-step1').className = 'text-blue-600';
+        document.getElementById('label-step2').className = '';
+        document.getElementById('label-step3').className = '';
       } else if (step === 3) {
+        document.getElementById('step-1').classList.add('hidden');
+        document.getElementById('step-2').classList.add('hidden');
         document.getElementById('step-3').classList.remove('hidden');
-        progressBar.style.width = '100%';
-        l1.className = 'text-green-600';
-        l2.className = 'text-green-600';
-        l3.className = 'text-green-600';
+
+        document.getElementById('progress-bar').style.width = '100%';
+        document.getElementById('label-step1').className = 'text-green-600';
+        document.getElementById('label-step2').className = 'text-green-600';
+        document.getElementById('label-step3').className = 'text-green-600';
 
         document.getElementById('confirm-name').innerText = document.getElementById('cust-name').value;
         document.getElementById('confirm-address').innerText = document.getElementById('cust-address').value;
