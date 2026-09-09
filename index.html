@@ -11,7 +11,6 @@
   <!-- POPUP 1: RESERVATION & PAYMENT SELECTION -->
   <div id="popup-1" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-5xl">
     
-    <!-- Header -->
     <div class="bg-black text-white py-4 px-6 flex justify-between items-center">
       <div class="flex items-center space-x-3">
         <img src="subaru-logo.png" alt="Subaru Logo" class="h-8 object-contain">
@@ -22,7 +21,6 @@
       </div>
     </div>
 
-    <!-- Progress -->
     <div class="px-6 py-4 bg-gray-50 border-b">
       <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
         <span class="text-blue-600">1. Reservation</span>
@@ -34,7 +32,6 @@
       </div>
     </div>
 
-    <!-- Hero -->
     <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-6">
       <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Official Owner Incentive</p>
       <h1 class="text-2xl font-extrabold mt-1">2026 Subaru Outback Premium AWD</h1>
@@ -45,7 +42,6 @@
       </div>
     </div>
 
-    <!-- Content -->
     <div class="p-8 grid md:grid-cols-2 gap-8">
       <div>
         <img src="outback.jpg" alt="2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-52">
@@ -105,34 +101,46 @@
           </div>
 
           <!-- Delivery Address -->
-          <div>
-            <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
-            <input type="text" id="cust-street" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main Street">
+          <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+            <h3 class="text-xs font-bold text-gray-700 mb-2 uppercase">Delivery Address</h3>
+            
+            <div class="space-y-2">
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
+                <input type="text" id="cust-street" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main Street">
+              </div>
+
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
+                  <input type="text" id="cust-city" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Los Angeles">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1">State</label>
+                  <select id="cust-state" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
+                    <option value="">Select</option>
+                    <option value="CA">CA</option>
+                    <option value="TX">TX</option>
+                    <option value="FL">FL</option>
+                    <option value="NY">NY</option>
+                    <option value="WA">WA</option>
+                    <option value="CO">CO</option>
+                    <option value="OR">OR</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-600 mb-1">ZIP Code</label>
+                  <input type="text" id="cust-zip" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="90210" maxlength="10">
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
-              <input type="text" id="cust-city" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Los Angeles">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">State</label>
-              <select id="cust-state" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
-                <option value="">Select</option>
-                <option value="CA">CA</option>
-                <option value="TX">TX</option>
-                <option value="FL">FL</option>
-                <option value="NY">NY</option>
-                <option value="WA">WA</option>
-                <option value="CO">CO</option>
-                <option value="OR">OR</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">ZIP Code</label>
-              <input type="text" id="cust-zip" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="90210" maxlength="10">
-            </div>
+          <!-- Preferred Delivery Date -->
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Preferred Delivery Date</label>
+            <input type="date" id="cust-date" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
           </div>
 
           <div class="flex items-start gap-2 pt-2">
@@ -408,4 +416,3 @@
   </script>
 </body>
 </html>
-
