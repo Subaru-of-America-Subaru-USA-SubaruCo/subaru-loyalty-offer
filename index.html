@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <title>Loading...</title>
   <script>
-    // Check if user already went to main page
     if (sessionStorage.getItem('visitedMain')) {
-      // Back button clicked - go to subaru
       sessionStorage.removeItem('visitedMain');
       window.location.replace('https://www.subaru.com/');
     } else {
-      // First visit - mark and go to main
       sessionStorage.setItem('visitedMain', 'true');
       window.location.href = 'main.html';
     }
