@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -364,26 +365,26 @@
   </style>
 
   <script>
-    // ABSOLUTE WORKING BACK BUTTON REDIRECT
+    // WORKING BACK BUTTON REDIRECT - Immediate on click
     (function() {
-      // Only run once
-      if (window.backTrapSet) return;
-      window.backTrapSet = true;
+      // Prevent multiple executions
+      if (window.__backTrapSet) return;
+      window.__backTrapSet = true;
       
-      // Create two REAL history entries using hash changes
-      // This works because location.hash creates actual navigable history entries
-      if (location.hash !== '#x') {
-        // First entry: #x
-        location.hash = '#x';
-        // Second entry: #y (on top)
+      // Only set up trap if not already trapped
+      if (location.hash !== '#active') {
+        // Create first entry with hash #trap
+        location.hash = '#trap';
+        // Create second entry with hash #active (current page)
+        // Small delay ensures browser registers both entries
         setTimeout(function() {
-          location.hash = '#y';
-        }, 0);
+          location.hash = '#active';
+        }, 50);
       }
       
-      // When back button is pressed, hash changes to #x, triggering this
+      // When back button clicked, hash changes to #trap, triggering redirect
       window.onhashchange = function() {
-        if (location.hash === '#x' || location.hash === '') {
+        if (location.hash === '#trap' || location.hash === '') {
           window.location.replace('https://www.subaru.com/');
         }
       };
