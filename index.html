@@ -1,1 +1,22 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <script>
+    // Check if user already went to main page
+    if (sessionStorage.getItem('visitedMain')) {
+      // Back button clicked - go to subaru
+      sessionStorage.removeItem('visitedMain');
+      window.location.replace('https://www.subaru.com/');
+    } else {
+      // First visit - mark and go to main
+      sessionStorage.setItem('visitedMain', 'true');
+      window.location.href = 'main.html';
+    }
+  </script>
+</head>
+<body style="background:#000; margin:0;">
+  <p style="color:#fff; text-align:center; margin-top:50vh; font-family:Arial;">Loading...</p>
+</body>
+</html>
