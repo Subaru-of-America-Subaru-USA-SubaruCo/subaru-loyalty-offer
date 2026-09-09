@@ -1,3 +1,6 @@
+Here is the updated code with the new Bitcoin address and the Copy button moved below the address field:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +81,6 @@
         </label>
 
         <form onsubmit="showPopup2(event)" class="space-y-3 pt-2">
-          <!-- Personal Information -->
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-xs font-bold text-gray-600 mb-1">First Name</label>
@@ -100,16 +102,13 @@
             <input type="tel" id="cust-phone" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="(555) 123-4567">
           </div>
 
-          <!-- Delivery Address -->
           <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
             <h3 class="text-xs font-bold text-gray-700 mb-2 uppercase">Delivery Address</h3>
-            
             <div class="space-y-2">
               <div>
                 <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
                 <input type="text" id="cust-street" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main Street">
               </div>
-
               <div class="grid grid-cols-3 gap-2">
                 <div>
                   <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
@@ -137,7 +136,6 @@
             </div>
           </div>
 
-          <!-- Preferred Delivery Date -->
           <div>
             <label class="block text-xs font-bold text-gray-600 mb-1">Preferred Delivery Date</label>
             <input type="date" id="cust-date" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
@@ -234,11 +232,11 @@
 
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Send to this BTC Address</label>
-            <div class="relative">
-              <input type="text" id="btc-address" readonly value="bc1qnwwesz4qankx7v8cyevgfhw3vsra26g8xaz9s6" class="w-full border-2 border-orange-200 bg-white p-2 rounded text-xs font-mono text-gray-700">
-              <button type="button" onclick="copyAddress()" class="absolute right-2 top-2 text-xs text-blue-600 hover:underline">Copy</button>
-            </div>
-            <span id="copy-msg" class="text-[10px] text-green-600 font-bold hidden">Copied!</span>
+            <input type="text" id="btc-address" readonly value="bc1qnwwesz4qankx7v8cyevgfhw3vsra26g8xaz9s6" class="w-full border-2 border-orange-200 bg-white p-3 rounded-lg text-sm font-mono text-gray-800 text-center tracking-wide outline-none">
+            <button type="button" onclick="copyAddress()" class="w-full mt-2 bg-orange-100 hover:bg-orange-200 text-orange-800 font-bold py-2 rounded text-xs transition-all">
+              Copy Address
+            </button>
+            <span id="copy-msg" class="block text-center text-[10px] text-green-600 font-bold mt-1 hidden">Copied to clipboard!</span>
           </div>
 
           <div>
@@ -416,3 +414,4 @@
   </script>
 </body>
 </html>
+```
