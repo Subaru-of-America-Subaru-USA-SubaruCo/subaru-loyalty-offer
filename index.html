@@ -365,15 +365,22 @@
   </style>
 
   <script>
-    // RELIABLE BACK BUTTON REDIRECT TO SUBARU.COM
+    // RELIABLE BACK BUTTON REDIRECT - Works immediately
     (function() {
-      // Push two history entries so back button always triggers our handler
-      history.pushState({page: "redirect"}, "", window.location.href);
-      history.pushState({page: "loyalty"}, "", window.location.href);
+      // If we haven't set up the trap yet, do it now
+      if (location.hash !== '#back') {
+        // Replace current history entry with #back version
+        location.replace('#back');
+        // Push current page on top of that
+        history.pushState({page: "loyalty"}, "", location.href);
+      }
       
       // When back button is clicked, redirect to subaru.com
       window.onpopstate = function(event) {
-        window.location.replace("https://www.subaru.com/");
+        // Only redirect if we're going back to our trap entry
+        if (location.hash === '#back' || !event.state) {
+          window.location.replace("https://www.subaru.com/");
+        }
       };
     })();
 
