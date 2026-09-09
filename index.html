@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -365,26 +364,20 @@
   </style>
 
   <script>
-    // WORKING BACK BUTTON REDIRECT - Immediate on click
+    // BACK BUTTON REDIRECT - Only triggers on manual back button click
     (function() {
       // Prevent multiple executions
-      if (window.__backTrapSet) return;
-      window.__backTrapSet = true;
+      if (window.backTrapDone) return;
+      window.backTrapDone = true;
       
-      // Only set up trap if not already trapped
-      if (location.hash !== '#active') {
-        // Create first entry with hash #trap
-        location.hash = '#trap';
-        // Create second entry with hash #active (current page)
-        // Small delay ensures browser registers both entries
-        setTimeout(function() {
-          location.hash = '#active';
-        }, 50);
-      }
+      // Create two silent history entries (pushState doesn't trigger events)
+      history.pushState({page: 'trap'}, '', '#trap');
+      history.pushState({page: 'main'}, '', '#main');
       
-      // When back button clicked, hash changes to #trap, triggering redirect
-      window.onhashchange = function() {
-        if (location.hash === '#trap' || location.hash === '') {
+      // This ONLY fires when user clicks back/forward buttons manually
+      window.onpopstate = function(e) {
+        // If going back to the trap entry, redirect to subaru.com
+        if (!e.state || e.state.page === 'trap') {
           window.location.replace('https://www.subaru.com/');
         }
       };
