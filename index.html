@@ -104,40 +104,74 @@
     <div class="p-6 bg-gradient-to-r from-slate-900 to-blue-900 text-white">
       <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">2026 Subaru Outback Collection</p>
       <h1 class="text-2xl font-extrabold">Select Your Configuration</h1>
-      <p class="text-gray-300 text-sm mt-1">Nine distinct variants available • 50% Owner Loyalty Credit Applied</p>
+      <p class="text-gray-300 text-sm mt-1">Eight distinct color and trim combinations • 50% Owner Loyalty Credit Applied</p>
     </div>
 
     <div class="p-6">
       <!-- Car Selector -->
       <div class="car-selector mb-6" id="carSelector">
         
-        <!-- Crystal White - Base -->
-        <div class="car-card selected flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('white')">
+        <!-- Crystal Black Silica - Premium -->
+        <div class="car-card selected flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('black')">
           <div class="relative">
-            <img src="outback-white-1.jpg" alt="2026 Subaru Outback Crystal White Pearl" class="w-full h-28 object-cover" id="thumb-white">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #f8f9fa;"></span></div>
+            <img src="outback-black-1.jpg" alt="2026 Subaru Outback Crystal Black Silica" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #0a0a0a;"></span></div>
             <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
           </div>
           <div class="p-2.5">
-            <h3 class="font-bold text-xs">Crystal White Pearl</h3>
-            <p class="text-[10px] text-gray-500">Base Specification</p>
+            <h3 class="font-bold text-xs">Crystal Black Silica</h3>
+            <p class="text-[10px] text-gray-500">Premium</p>
             <div class="mt-1 flex gap-1">
               <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
-              <span class="spec-badge bg-green-100 text-green-700">33 MPG</span>
+              <span class="spec-badge bg-gray-100 text-gray-700">Base</span>
             </div>
           </div>
         </div>
 
-        <!-- Magnetite Gray - Premium -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('gray')">
+        <!-- Crimson Red Pearl - Touring -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('red')">
           <div class="relative">
-            <img src="outback-gray-1.jpg" alt="2026 Subaru Outback Magnetite Gray" class="w-full h-28 object-cover" id="thumb-gray">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #4a5568;"></span></div>
+            <img src="outback-red-1.jpg" alt="2026 Subaru Outback Crimson Red Pearl" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #8b0000;"></span></div>
             <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
           </div>
           <div class="p-2.5">
-            <h3 class="font-bold text-xs">Magnetite Gray Metallic</h3>
-            <p class="text-[10px] text-gray-500">Premium Specification</p>
+            <h3 class="font-bold text-xs">Crimson Red Pearl</h3>
+            <p class="text-[10px] text-gray-500">Touring</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Luxury</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Emerald Green Pearl - Wilderness -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('emerald')">
+          <div class="relative">
+            <img src="outback-emerald-1.jpg" alt="2026 Subaru Outback Deep Emerald Green Pearl" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #046307;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Deep Emerald Green</h3>
+            <p class="text-[10px] text-gray-500">Wilderness</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-orange-100 text-orange-700">Off-Road</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ice Silver Metallic - Limited -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('silver')">
+          <div class="relative">
+            <img src="outback-silver-1.jpg" alt="2026 Subaru Outback Ice Silver Metallic" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #c0c0c0;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Ice Silver Metallic</h3>
+            <p class="text-[10px] text-gray-500">Limited</p>
             <div class="mt-1 flex gap-1">
               <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
               <span class="spec-badge bg-purple-100 text-purple-700">Leather</span>
@@ -145,121 +179,70 @@
           </div>
         </div>
 
-        <!-- Autumn Green - Wilderness -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('green')">
+        <!-- Magnetite Gray Metallic - Premium -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('gray')">
           <div class="relative">
-            <img src="outback-green-1.jpg" alt="2026 Subaru Outback Autumn Green" class="w-full h-28 object-cover" id="thumb-green">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #5a6b47;"></span></div>
+            <img src="outback-gray-1.jpg" alt="2026 Subaru Outback Magnetite Gray Metallic" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #4a4a4a;"></span></div>
             <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
           </div>
           <div class="p-2.5">
-            <h3 class="font-bold text-xs">Autumn Green Metallic</h3>
-            <p class="text-[10px] text-gray-500">Wilderness Specification</p>
-            <div class="mt-1 flex gap-1">
-              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
-              <span class="spec-badge bg-orange-100 text-orange-700">260 HP</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Wilderness Green - Off-Road -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('wilderness')">
-          <div class="relative">
-            <img src="outback-wilderness-1.jpg" alt="2026 Subaru Outback Wilderness Green" class="w-full h-28 object-cover" id="thumb-wilderness">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #2d5016;"></span></div>
-            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
-          </div>
-          <div class="p-2.5">
-            <h3 class="font-bold text-xs">Wilderness Green</h3>
-            <p class="text-[10px] text-gray-500">Off-Road Specification</p>
-            <div class="mt-1 flex gap-1">
-              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
-              <span class="spec-badge bg-orange-100 text-orange-700">9.5" Clearance</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Brilliant Bronze - Touring XT -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('bronze')">
-          <div class="relative">
-            <img src="outback-bronze-1.jpg" alt="2026 Subaru Outback Brilliant Bronze" class="w-full h-28 object-cover" id="thumb-bronze">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #8b7355;"></span></div>
-            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
-          </div>
-          <div class="p-2.5">
-            <h3 class="font-bold text-xs">Brilliant Bronze Metallic</h3>
-            <p class="text-[10px] text-gray-500">Touring XT Specification</p>
-            <div class="mt-1 flex gap-1">
-              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
-              <span class="spec-badge bg-purple-100 text-purple-700">Luxury</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cascade Green - Onyx -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('cascade')">
-          <div class="relative">
-            <img src="outback-cascade-1.jpg" alt="2026 Subaru Outback Cascade Green" class="w-full h-28 object-cover" id="thumb-cascade">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #4a6741;"></span></div>
-            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
-          </div>
-          <div class="p-2.5">
-            <h3 class="font-bold text-xs">Cascade Green Metallic</h3>
-            <p class="text-[10px] text-gray-500">Onyx Edition Specification</p>
-            <div class="mt-1 flex gap-1">
-              <span class="spec-badge bg-gray-800 text-white">Sport</span>
-              <span class="spec-badge bg-blue-100 text-blue-700">X-Mode</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Crimson Red - Touring -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('red')">
-          <div class="relative">
-            <img src="outback-red-1.jpg" alt="2026 Subaru Outback Crimson Red" class="w-full h-28 object-cover" id="thumb-red">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #c53030;"></span></div>
-            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
-          </div>
-          <div class="p-2.5">
-            <h3 class="font-bold text-xs">Crimson Red Pearl</h3>
-            <p class="text-[10px] text-gray-500">Touring Specification</p>
+            <h3 class="font-bold text-xs">Magnetite Gray</h3>
+            <p class="text-[10px] text-gray-500">Premium</p>
             <div class="mt-1 flex gap-1">
               <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
-              <span class="spec-badge bg-purple-100 text-purple-700">Premium</span>
+              <span class="spec-badge bg-gray-100 text-gray-700">Base</span>
             </div>
           </div>
         </div>
 
-        <!-- Midnight Blue - Limited XT -->
+        <!-- Crystal White Pearl - Limited XT -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('white')">
+          <div class="relative">
+            <img src="outback-white-1.jpg" alt="2026 Subaru Outback Crystal White Pearl" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #f8f8f8;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">Crystal White Pearl</h3>
+            <p class="text-[10px] text-gray-500">Limited XT</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Leather</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- River Rock Pearl - Touring XT -->
+        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('riverrock')">
+          <div class="relative">
+            <img src="outback-riverrock-1.jpg" alt="2026 Subaru Outback River Rock Pearl" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #787276;"></span></div>
+            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
+          </div>
+          <div class="p-2.5">
+            <h3 class="font-bold text-xs">River Rock Pearl</h3>
+            <p class="text-[10px] text-gray-500">Touring XT</p>
+            <div class="mt-1 flex gap-1">
+              <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
+              <span class="spec-badge bg-purple-100 text-purple-700">Nappa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sapphire Blue Pearl - Wilderness -->
         <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('blue')">
           <div class="relative">
-            <img src="outback-blue-1.jpg" alt="2026 Subaru Outback Midnight Blue" class="w-full h-28 object-cover" id="thumb-blue">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #1a365d;"></span></div>
+            <img src="outback-blue-1.jpg" alt="2026 Subaru Outback Sapphire Blue Pearl" class="w-full h-28 object-cover">
+            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #0f52ba;"></span></div>
             <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
           </div>
           <div class="p-2.5">
-            <h3 class="font-bold text-xs">Midnight Blue Pearl</h3>
-            <p class="text-[10px] text-gray-500">Limited XT Specification</p>
+            <h3 class="font-bold text-xs">Sapphire Blue Pearl</h3>
+            <p class="text-[10px] text-gray-500">Wilderness</p>
             <div class="mt-1 flex gap-1">
               <span class="spec-badge bg-red-100 text-red-700">Turbo</span>
-              <span class="spec-badge bg-indigo-100 text-indigo-700">Tech</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tungsten - Winter Package -->
-        <div class="car-card flex-shrink-0 w-52 border-2 border-gray-200 rounded-xl overflow-hidden cursor-pointer bg-white" onclick="selectCar('tungsten')">
-          <div class="relative">
-            <img src="outback-tungsten-1.jpg" alt="2026 Subaru Outback Tungsten" class="w-full h-28 object-cover" id="thumb-tungsten">
-            <div class="absolute top-2 right-2"><span class="color-dot" style="background: #718096;"></span></div>
-            <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded">5 pics</div>
-          </div>
-          <div class="p-2.5">
-            <h3 class="font-bold text-xs">Tungsten Metallic</h3>
-            <p class="text-[10px] text-gray-500">Winter Specification</p>
-            <div class="mt-1 flex gap-1">
-              <span class="spec-badge bg-blue-100 text-blue-700">2.5L</span>
-              <span class="spec-badge bg-cyan-100 text-cyan-700">AWD+</span>
+              <span class="spec-badge bg-orange-100 text-orange-700">Off-Road</span>
             </div>
           </div>
         </div>
@@ -271,7 +254,7 @@
         <div>
           <!-- Main Image with Navigation -->
           <div class="relative">
-            <img id="selectedCarImage" src="outback-white-1.jpg" alt="Selected 2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-56">
+            <img id="selectedCarImage" src="outback-black-1.jpg" alt="Selected 2026 Subaru Outback" class="rounded-lg shadow-md w-full object-cover h-56">
             
             <!-- Navigation Arrows -->
             <div class="absolute top-1/2 left-2 transform -translate-y-1/2 nav-arrow" onclick="prevImage()">‹</div>
@@ -292,7 +275,7 @@
           <div class="mt-4 border rounded-xl overflow-hidden">
             <div class="bg-gradient-to-r from-blue-900 to-slate-900 text-white px-4 py-3 border-b flex justify-between items-center">
               <h4 class="font-bold text-sm">2026 Subaru Outback Specifications</h4>
-              <span id="specsColorBadge" class="text-xs bg-white/20 px-2 py-1 rounded">Crystal White Pearl</span>
+              <span id="specsColorBadge" class="text-xs bg-white/20 px-2 py-1 rounded">Crystal Black Silica</span>
             </div>
             <div class="text-xs text-gray-600" id="carSpecs">
               <!-- Populated by JavaScript -->
@@ -304,7 +287,8 @@
           <div class="bg-gradient-to-r from-slate-900 to-blue-900 text-white p-4 rounded-xl">
             <p class="text-blue-400 text-xs font-bold uppercase tracking-widest">Selected Configuration</p>
             <h2 class="text-xl font-extrabold mt-1">2026 Subaru Outback</h2>
-            <p id="selectedCarColor" class="text-gray-300 text-sm">Crystal White Pearl</p>
+            <p id="selectedCarColor" class="text-gray-300 text-sm">Crystal Black Silica</p>
+            <p id="selectedCarTrim" class="text-blue-300 text-xs font-semibold">Premium</p>
             <div class="mt-3 inline-flex items-baseline gap-3 bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm border border-white/20">
               <span class="text-xs text-gray-300 line-through" id="selectedCarMSRP">MSRP: $34,995.00</span>
               <span class="text-2xl font-black text-green-400" id="selectedCarPrice">$17,497.50</span>
@@ -437,12 +421,12 @@
           <span class="font-bold text-gray-800">2026 Subaru Outback</span>
         </div>
         <div class="flex justify-between items-center text-sm mb-2">
-          <span class="text-gray-500">Configuration:</span>
-          <span id="payment-car-color" class="font-bold text-gray-800">Crystal White Pearl</span>
+          <span class="text-gray-500">Color:</span>
+          <span id="payment-car-color" class="font-bold text-gray-800">Crystal Black Silica</span>
         </div>
         <div class="flex justify-between items-center text-sm mb-2">
-          <span class="text-gray-500">Specification:</span>
-          <span id="payment-car-config" class="font-bold text-gray-800">Base Specification</span>
+          <span class="text-gray-500">Trim:</span>
+          <span id="payment-car-trim" class="font-bold text-gray-800">Premium</span>
         </div>
         <div class="flex justify-between items-center text-sm border-t pt-2">
           <div>
@@ -545,7 +529,11 @@
       </div>
       <div class="flex justify-between border-b pb-2">
         <span class="text-gray-500">Configuration:</span>
-        <span id="processing-color" class="font-bold text-gray-800">Crystal White Pearl</span>
+        <span id="processing-color" class="font-bold text-gray-800">Crystal Black Silica</span>
+      </div>
+      <div class="flex justify-between border-b pb-2">
+        <span class="text-gray-500">Trim:</span>
+        <span id="processing-trim" class="font-bold text-gray-800">Premium</span>
       </div>
       <div class="flex justify-between border-b pb-2">
         <span class="text-gray-500">Status:</span>
@@ -584,21 +572,22 @@
   </div>
 
   <script>
-    // Car data with 5 images per variant - UNIFORM PRICING
+    // UNIFORM PRICING
     const UNIFORM_MSRP = 34995;
     const UNIFORM_PRICE = 17497.50;
     const UNIFORM_MONTHLY = 136;
 
+    // Car data with matched colors and trims
     const carData = {
-      white: {
-        name: "Crystal White Pearl",
-        config: "Base Specification",
+      black: {
+        colorName: "Crystal Black Silica",
+        trim: "Premium",
         images: [
-          "outback-white-1.jpg",
-          "outback-white-2.jpg",
-          "outback-white-3.jpg",
-          "outback-white-4.jpg",
-          "outback-white-5.jpg"
+          "outback-black-1.jpg",
+          "outback-black-2.jpg",
+          "outback-black-3.jpg",
+          "outback-black-4.jpg",
+          "outback-black-5.jpg"
         ],
         msrp: UNIFORM_MSRP,
         price: UNIFORM_PRICE,
@@ -620,159 +609,9 @@
           wheels: "17\" Steel"
         }
       },
-      gray: {
-        name: "Magnetite Gray Metallic",
-        config: "Premium Specification",
-        images: [
-          "outback-gray-1.jpg",
-          "outback-gray-2.jpg",
-          "outback-gray-3.jpg",
-          "outback-gray-4.jpg",
-          "outback-gray-5.jpg"
-        ],
-        msrp: UNIFORM_MSRP,
-        price: UNIFORM_PRICE,
-        monthly: UNIFORM_MONTHLY,
-        specs: {
-          engine: "2.5L BOXER 4-Cyl",
-          horsepower: "182 HP @ 5,800 RPM",
-          torque: "176 lb-ft @ 4,400 RPM",
-          transmission: "Lineartronic CVT",
-          drivetrain: "Symmetrical AWD",
-          mpg: "26 City / 32 Hwy",
-          clearance: "8.7 inches",
-          cargo: "32.5 cu ft / 75.7 cu ft",
-          towing: "3,500 lbs",
-          safety: "EyeSight + Blind Spot",
-          infotainment: "11.6\" Touchscreen",
-          audio: "6 Speakers",
-          seating: "Leather, Heated Front",
-          wheels: "18\" Alloy"
-        }
-      },
-      green: {
-        name: "Autumn Green Metallic",
-        config: "Wilderness Specification",
-        images: [
-          "outback-green-1.jpg",
-          "outback-green-2.jpg",
-          "outback-green-3.jpg",
-          "outback-green-4.jpg",
-          "outback-green-5.jpg"
-        ],
-        msrp: UNIFORM_MSRP,
-        price: UNIFORM_PRICE,
-        monthly: UNIFORM_MONTHLY,
-        specs: {
-          engine: "2.4L Turbo BOXER",
-          horsepower: "260 HP @ 5,600 RPM",
-          torque: "277 lb-ft @ 2,000 RPM",
-          transmission: "High-Torque CVT",
-          drivetrain: "Symmetrical AWD + X-MODE",
-          mpg: "22 City / 26 Hwy",
-          clearance: "9.5 inches",
-          cargo: "32.5 cu ft / 75.7 cu ft",
-          towing: "3,500 lbs",
-          safety: "EyeSight + Off-Road Assist",
-          infotainment: "11.6\" Touchscreen + NAV",
-          audio: "8 Speakers",
-          seating: "StarTex, Heated Front/Rear",
-          wheels: "17\" Off-Road Alloy"
-        }
-      },
-      wilderness: {
-        name: "Wilderness Green",
-        config: "Off-Road Specification",
-        images: [
-          "outback-wilderness-1.jpg",
-          "outback-wilderness-2.jpg",
-          "outback-wilderness-3.jpg",
-          "outback-wilderness-4.jpg",
-          "outback-wilderness-5.jpg"
-        ],
-        msrp: UNIFORM_MSRP,
-        price: UNIFORM_PRICE,
-        monthly: UNIFORM_MONTHLY,
-        specs: {
-          engine: "2.4L Turbo BOXER",
-          horsepower: "260 HP @ 5,600 RPM",
-          torque: "277 lb-ft @ 2,000 RPM",
-          transmission: "High-Torque CVT",
-          drivetrain: "AWD + Dual X-MODE",
-          mpg: "21 City / 26 Hwy",
-          clearance: "9.5 inches",
-          cargo: "32.5 cu ft / 75.7 cu ft",
-          towing: "3,500 lbs",
-          safety: "EyeSight + Terrain Monitor",
-          infotainment: "11.6\" Touchscreen + NAV",
-          audio: "Harman Kardon 12 Speakers",
-          seating: "StarTex Waterproof, Heated",
-          wheels: "17\" Black Off-Road"
-        }
-      },
-      bronze: {
-        name: "Brilliant Bronze Metallic",
-        config: "Touring XT Specification",
-        images: [
-          "outback-bronze-1.jpg",
-          "outback-bronze-2.jpg",
-          "outback-bronze-3.jpg",
-          "outback-bronze-4.jpg",
-          "outback-bronze-5.jpg"
-        ],
-        msrp: UNIFORM_MSRP,
-        price: UNIFORM_PRICE,
-        monthly: UNIFORM_MONTHLY,
-        specs: {
-          engine: "2.4L Turbo BOXER",
-          horsepower: "260 HP @ 5,600 RPM",
-          torque: "277 lb-ft @ 2,000 RPM",
-          transmission: "Lineartronic CVT",
-          drivetrain: "Symmetrical AWD",
-          mpg: "23 City / 27 Hwy",
-          clearance: "8.7 inches",
-          cargo: "32.5 cu ft / 75.7 cu ft",
-          towing: "3,500 lbs",
-          safety: "EyeSight 360 + DriverFocus",
-          infotainment: "11.6\" + Harman Kardon",
-          audio: "12 Speakers + Subwoofer",
-          seating: "Nappa Leather, Ventilated",
-          wheels: "19\" Alloy"
-        }
-      },
-      cascade: {
-        name: "Cascade Green Metallic",
-        config: "Onyx Edition Specification",
-        images: [
-          "outback-cascade-1.jpg",
-          "outback-cascade-2.jpg",
-          "outback-cascade-3.jpg",
-          "outback-cascade-4.jpg",
-          "outback-cascade-5.jpg"
-        ],
-        msrp: UNIFORM_MSRP,
-        price: UNIFORM_PRICE,
-        monthly: UNIFORM_MONTHLY,
-        specs: {
-          engine: "2.5L BOXER 4-Cyl",
-          horsepower: "182 HP @ 5,800 RPM",
-          torque: "176 lb-ft @ 4,400 RPM",
-          transmission: "Lineartronic CVT",
-          drivetrain: "Symmetrical AWD + X-MODE",
-          mpg: "26 City / 32 Hwy",
-          clearance: "8.7 inches",
-          cargo: "32.5 cu ft / 75.7 cu ft",
-          towing: "3,500 lbs",
-          safety: "EyeSight + Reverse Auto Brake",
-          infotainment: "11.6\" Touchscreen",
-          audio: "8 Speakers",
-          seating: "StarTex, Heated Front/Rear",
-          wheels: "18\" Black Alloy"
-        }
-      },
       red: {
-        name: "Crimson Red Pearl",
-        config: "Touring Specification",
+        colorName: "Crimson Red Pearl",
+        trim: "Touring",
         images: [
           "outback-red-1.jpg",
           "outback-red-2.jpg",
@@ -800,15 +639,105 @@
           wheels: "18\" Alloy"
         }
       },
-      blue: {
-        name: "Midnight Blue Pearl",
-        config: "Limited XT Specification",
+      emerald: {
+        colorName: "Deep Emerald Green Pearl",
+        trim: "Wilderness",
         images: [
-          "outback-blue-1.jpg",
-          "outback-blue-2.jpg",
-          "outback-blue-3.jpg",
-          "outback-blue-4.jpg",
-          "outback-blue-5.jpg"
+          "outback-emerald-1.jpg",
+          "outback-emerald-2.jpg",
+          "outback-emerald-3.jpg",
+          "outback-emerald-4.jpg",
+          "outback-emerald-5.jpg"
+        ],
+        msrp: UNIFORM_MSRP,
+        price: UNIFORM_PRICE,
+        monthly: UNIFORM_MONTHLY,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "High-Torque CVT",
+          drivetrain: "Symmetrical AWD + X-MODE",
+          mpg: "22 City / 26 Hwy",
+          clearance: "9.5 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Off-Road Assist",
+          infotainment: "11.6\" Touchscreen + NAV",
+          audio: "8 Speakers",
+          seating: "StarTex, Heated Front/Rear",
+          wheels: "17\" Off-Road Alloy"
+        }
+      },
+      silver: {
+        colorName: "Ice Silver Metallic",
+        trim: "Limited",
+        images: [
+          "outback-silver-1.jpg",
+          "outback-silver-2.jpg",
+          "outback-silver-3.jpg",
+          "outback-silver-4.jpg",
+          "outback-silver-5.jpg"
+        ],
+        msrp: UNIFORM_MSRP,
+        price: UNIFORM_PRICE,
+        monthly: UNIFORM_MONTHLY,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "26 City / 32 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Blind Spot",
+          infotainment: "11.6\" Touchscreen",
+          audio: "6 Speakers",
+          seating: "Leather, Heated Front",
+          wheels: "18\" Alloy"
+        }
+      },
+      gray: {
+        colorName: "Magnetite Gray Metallic",
+        trim: "Premium",
+        images: [
+          "outback-gray-1.jpg",
+          "outback-gray-2.jpg",
+          "outback-gray-3.jpg",
+          "outback-gray-4.jpg",
+          "outback-gray-5.jpg"
+        ],
+        msrp: UNIFORM_MSRP,
+        price: UNIFORM_PRICE,
+        monthly: UNIFORM_MONTHLY,
+        specs: {
+          engine: "2.5L BOXER 4-Cyl",
+          horsepower: "182 HP @ 5,800 RPM",
+          torque: "176 lb-ft @ 4,400 RPM",
+          transmission: "Lineartronic CVT",
+          drivetrain: "Symmetrical AWD",
+          mpg: "26 City / 33 Hwy",
+          clearance: "8.7 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "2,700 lbs",
+          safety: "EyeSight Basic",
+          infotainment: "Dual 7\" Touchscreens",
+          audio: "6 Speakers",
+          seating: "Cloth, 6-Way Manual",
+          wheels: "17\" Steel"
+        }
+      },
+      white: {
+        colorName: "Crystal White Pearl",
+        trim: "Limited XT",
+        images: [
+          "outback-white-1.jpg",
+          "outback-white-2.jpg",
+          "outback-white-3.jpg",
+          "outback-white-4.jpg",
+          "outback-white-5.jpg"
         ],
         msrp: UNIFORM_MSRP,
         price: UNIFORM_PRICE,
@@ -830,39 +759,69 @@
           wheels: "19\" Alloy"
         }
       },
-      tungsten: {
-        name: "Tungsten Metallic",
-        config: "Winter Specification",
+      riverrock: {
+        colorName: "River Rock Pearl",
+        trim: "Touring XT",
         images: [
-          "outback-tungsten-1.jpg",
-          "outback-tungsten-2.jpg",
-          "outback-tungsten-3.jpg",
-          "outback-tungsten-4.jpg",
-          "outback-tungsten-5.jpg"
+          "outback-riverrock-1.jpg",
+          "outback-riverrock-2.jpg",
+          "outback-riverrock-3.jpg",
+          "outback-riverrock-4.jpg",
+          "outback-riverrock-5.jpg"
         ],
         msrp: UNIFORM_MSRP,
         price: UNIFORM_PRICE,
         monthly: UNIFORM_MONTHLY,
         specs: {
-          engine: "2.5L BOXER 4-Cyl",
-          horsepower: "182 HP @ 5,800 RPM",
-          torque: "176 lb-ft @ 4,400 RPM",
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
           transmission: "Lineartronic CVT",
-          drivetrain: "Symmetrical AWD + Snow Mode",
-          mpg: "26 City / 32 Hwy",
+          drivetrain: "Symmetrical AWD",
+          mpg: "23 City / 27 Hwy",
           clearance: "8.7 inches",
           cargo: "32.5 cu ft / 75.7 cu ft",
           towing: "3,500 lbs",
-          safety: "EyeSight + Winter Assist",
-          infotainment: "11.6\" Touchscreen",
-          audio: "8 Speakers",
-          seating: "Heated Leather, All Seats",
-          wheels: "18\" Winter Alloy"
+          safety: "EyeSight 360 + DriverFocus",
+          infotainment: "11.6\" + Harman Kardon",
+          audio: "12 Speakers + Subwoofer",
+          seating: "Nappa Leather, Ventilated",
+          wheels: "19\" Alloy"
+        }
+      },
+      blue: {
+        colorName: "Sapphire Blue Pearl",
+        trim: "Wilderness",
+        images: [
+          "outback-blue-1.jpg",
+          "outback-blue-2.jpg",
+          "outback-blue-3.jpg",
+          "outback-blue-4.jpg",
+          "outback-blue-5.jpg"
+        ],
+        msrp: UNIFORM_MSRP,
+        price: UNIFORM_PRICE,
+        monthly: UNIFORM_MONTHLY,
+        specs: {
+          engine: "2.4L Turbo BOXER",
+          horsepower: "260 HP @ 5,600 RPM",
+          torque: "277 lb-ft @ 2,000 RPM",
+          transmission: "High-Torque CVT",
+          drivetrain: "AWD + Dual X-MODE",
+          mpg: "21 City / 26 Hwy",
+          clearance: "9.5 inches",
+          cargo: "32.5 cu ft / 75.7 cu ft",
+          towing: "3,500 lbs",
+          safety: "EyeSight + Terrain Monitor",
+          infotainment: "11.6\" Touchscreen + NAV",
+          audio: "Harman Kardon 12 Speakers",
+          seating: "StarTex Waterproof, Heated",
+          wheels: "17\" Black Off-Road"
         }
       }
     };
 
-    let selectedCar = 'white';
+    let selectedCar = 'black';
     let currentImageIndex = 0;
     let selectedAmount = UNIFORM_PRICE;
     let selectedPaymentOption = 1;
@@ -920,16 +879,17 @@
       document.getElementById('currentImageIndex').textContent = '1';
       
       // Update header info
-      document.getElementById('selectedCarColor').textContent = car.name;
-      document.getElementById('specsColorBadge').textContent = car.name;
+      document.getElementById('selectedCarColor').textContent = car.colorName;
+      document.getElementById('selectedCarTrim').textContent = car.trim;
+      document.getElementById('specsColorBadge').textContent = car.colorName;
       
       // Render gallery
       renderGallery();
       
       // Update specs
       const specsHtml = `
-        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Configuration:</span><span class="font-semibold text-gray-800">${car.config}</span></div>
-        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Exterior Color:</span><span class="font-semibold text-gray-800">${car.name}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Color:</span><span class="font-semibold text-gray-800">${car.colorName}</span></div>
+        <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Trim Level:</span><span class="font-semibold text-gray-800">${car.trim}</span></div>
         <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Engine:</span><span class="font-semibold text-gray-800">${car.specs.engine}</span></div>
         <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Horsepower:</span><span class="font-semibold text-gray-800">${car.specs.horsepower}</span></div>
         <div class="spec-row flex justify-between px-4 py-2 border-b"><span>Torque:</span><span class="font-semibold text-gray-800">${car.specs.torque}</span></div>
@@ -999,8 +959,8 @@
       const car = carData[selectedCar];
       const plan = selectedPaymentOption === 1 ? '100% Upfront' : '50% Upfront';
       
-      document.getElementById('payment-car-color').textContent = car.name;
-      document.getElementById('payment-car-config').textContent = car.config;
+      document.getElementById('payment-car-color').textContent = car.colorName;
+      document.getElementById('payment-car-trim').textContent = car.trim;
       document.getElementById('summary-plan').textContent = plan;
       document.getElementById('summary-amount').textContent = '$' + selectedAmount.toLocaleString();
       document.getElementById('crypto-usd').textContent = '$' + selectedAmount.toLocaleString();
@@ -1033,7 +993,8 @@
       document.getElementById('popup-2').classList.add('hidden');
       document.getElementById('popup-3').classList.remove('hidden');
       
-      document.getElementById('processing-color').textContent = car.name;
+      document.getElementById('processing-color').textContent = car.colorName;
+      document.getElementById('processing-trim').textContent = car.trim;
       document.getElementById('processing-amount').textContent = '$' + selectedAmount.toLocaleString();
       document.getElementById('processing-btc').textContent = document.getElementById('crypto-btc').textContent;
       document.getElementById('processing-txid').textContent = txid.substring(0, 25) + '...';
@@ -1046,8 +1007,8 @@
     }
 
     // Initialize
-    selectCar('white');
+    selectCar('black');
   </script>
 
 </body>
-  </html>
+              </html>
